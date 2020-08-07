@@ -122,6 +122,12 @@ namespace Learning_English
                 ButtonGetAnswer.Visibility = Visibility.Visible;
                 unit = ComboBoxUnitsTesting.SelectedIndex;
 
+                ComboBoxUnitsTesting.IsEnabled = false;
+                CheckBoxWordsByChance.IsEnabled = false;
+                CheckBoxTimerMinutes.IsEnabled = false;
+                SliderTimerMinutes.IsEnabled = false;
+                TextBoxTimerMinutes.IsEnabled = false;
+
                 if (unit > 0)
                 {
                     int a = 0;
