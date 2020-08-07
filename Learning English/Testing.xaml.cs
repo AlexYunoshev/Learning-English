@@ -32,8 +32,10 @@ namespace Learning_English
         private int allWordsCount;
         private int nowWordNumber = 1;
         private int unit = 0; // 0 = All
+        private int byChanceVariable = 0;
+        private IEnumerable<Learning_English.Words.Word> words;
+        private List<Word> EnglishDataList; 
 
-       
         private BindingList<Word> EnglishData; // слова
     
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
@@ -129,6 +131,7 @@ namespace Learning_English
                 SliderTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.IsEnabled = false;
                 ButtonNextQuestion.IsEnabled = false;
+                TextBoxAnswer.Text = "";
 
                 if (unit > 0)
                 {
@@ -145,33 +148,24 @@ namespace Learning_English
                 }
 
 
-                //if (unit > 0)
-                //{
-                //    int a = 0;
-                //    foreach (Word i in EnglishData)
-                //    {
-                //        if (Convert.ToInt32(EnglishData[a].unit) == unit)
-                //        {
-
-
-                //        }
-                //        a++;
-                //    }
-                //    allWordsCount = EnglishData.Count;
-                //}
-
+               
 
 
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
 
-                int b = 0;
-                foreach (Word i in EnglishData)
-                {
-                    TextBlockQuestion.Text += EnglishData[b].translateWord;
-                    b++;
-                }
-                //TextBlockQuestion.Text = EnglishData[nowWordNumber - 1].translateWord;
+                words = (from k in EnglishData where Convert.ToInt32(k.unit) == unit select k);
+                EnglishDataList = words.ToList();
+                //TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord ;
+                
+                TextBlockQuestion.Text = EnglishDataList[byChanceVariable].ToString();
+                //int b = 0;
+                //foreach (Word i in EnglishData)
+                //{
+                //    TextBlockQuestion.Text += EnglishData[b].translateWord;
+                //    b++;
+                //}
+
             }
 
             if (testingFinal == true)
@@ -224,6 +218,11 @@ namespace Learning_English
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
+
+
+            byChanceVariable++;
+            //TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord;
+            TextBlockQuestion.Text = words.ElementAt(byChanceVariable).ToString();
         }
 
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
