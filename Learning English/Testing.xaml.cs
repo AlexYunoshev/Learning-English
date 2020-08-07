@@ -128,6 +128,7 @@ namespace Learning_English
                 CheckBoxTimerMinutes.IsEnabled = false;
                 SliderTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.IsEnabled = false;
+                ButtonNextQuestion.IsEnabled = false;
 
                 if (unit > 0)
                 {
@@ -221,12 +222,17 @@ namespace Learning_English
             nowWordNumber++;
             ProgressBar.Value = nowWordNumber;
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-
+            ButtonNextQuestion.IsEnabled = false;
+            ButtonGetAnswer.IsEnabled = true;
         }
 
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ButtonNextQuestion.IsEnabled == false)
+            {
+                ButtonNextQuestion.IsEnabled = true;
+                ButtonGetAnswer.IsEnabled = false;
+            }
         }
     }
 }
