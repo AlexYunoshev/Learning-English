@@ -27,6 +27,7 @@ namespace Learning_English
         private bool testingFinal = false; // в тесте пройдены все слова
         private bool exit = false; // выход из окна
         private bool wordsByChance = false; // слова вразброс
+        private bool getAnswer = false; // дал ли пользователь ответ на вопрос?
         private int time = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
         private int allWordsCount;
         private int nowWordNumber = 1;
