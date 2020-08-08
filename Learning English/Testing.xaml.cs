@@ -209,6 +209,7 @@ namespace Learning_English
 
         private void ButtonNextQuestion_Click(object sender, RoutedEventArgs e)
         {
+            TextBoxAnswer.IsReadOnly = false;
             nowWordNumber++;
             ProgressBar.Value = nowWordNumber;
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
@@ -237,6 +238,7 @@ namespace Learning_English
                 ButtonNextQuestion.IsEnabled = true;
                 ButtonGetAnswer.IsEnabled = false;
             }
+            TextBoxAnswer.IsReadOnly = true;
 
             if (nowWordNumber == allWordsCount)
             {
