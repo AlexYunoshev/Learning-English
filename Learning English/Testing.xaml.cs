@@ -257,16 +257,34 @@ namespace Learning_English
             }
 
 
-            if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+            if (unit != 0)
             {
-                TextBoxAnswer.Foreground = Brushes.Green;
-               
+                if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+                {
+                    TextBoxAnswer.Foreground = Brushes.Green;
+
+                }
+                else
+                {
+                    TextBoxAnswer.Foreground = Brushes.Red;
+                }
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[byChanceVariable].englishWord;
             }
             else
             {
-                TextBoxAnswer.Foreground = Brushes.Red;
+                if (string.Equals(EnglishData[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+                {
+                    TextBoxAnswer.Foreground = Brushes.Green;
+
+                }
+                else
+                {
+                    TextBoxAnswer.Foreground = Brushes.Red;
+                }
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[byChanceVariable].englishWord;
             }
-            TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[byChanceVariable].englishWord;
+
+            
 
 
         }
