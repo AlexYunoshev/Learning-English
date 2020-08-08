@@ -153,7 +153,7 @@ namespace Learning_English
 
                 foreach (Word n in EnglishData)
                 {
-                    EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == 2) select k).ToList();
+                    EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == unit) select k).ToList();
 
                 }
 
