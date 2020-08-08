@@ -36,9 +36,12 @@ namespace Learning_English
         private int byChanceVariable = 0;
    
         private BindingList<Word> EnglishData; // слова
-    
+
+        private List<Word> EnglishDataFiltered = new List<Word>();
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
         private List<int> IndexOfWords = new List<int>(); // использованные индексы слов
+        
+
 
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
@@ -147,6 +150,15 @@ namespace Learning_English
 
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
+
+                foreach (Word n in EnglishData)
+                {
+                    EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == 2) select k).ToList();
+
+                }
+
+                TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+
             }
 
             if (testingFinal == true)
@@ -200,7 +212,8 @@ namespace Learning_English
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
             byChanceVariable++;
-           
+            TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+
         }
 
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
