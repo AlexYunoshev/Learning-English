@@ -181,12 +181,15 @@ namespace Learning_English
 
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (ProgressBar.Value == ProgressBar.Maximum)
-            {
-                testingFinal = true;
-                ButtonStartEndTesting.Visibility = Visibility.Visible;
-                ProgressBar.Visibility = Visibility.Hidden;
-            }
+            //if (ProgressBar.Value == ProgressBar.Maximum)
+            //{
+            //    ButtonGetAnswer.Margin = new Thickness(5, 184, 0, 0);
+
+
+            //    //testingFinal = true;
+            //    //ButtonStartEndTesting.Visibility = Visibility.Visible;
+            //    //ProgressBar.Visibility = Visibility.Hidden;
+            //}
         }
 
         private void UpdateComboBox()
@@ -226,15 +229,24 @@ namespace Learning_English
             else
                 TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
 
+            if (nowWordNumber == allWordsCount)
+            {
+                ButtonNextQuestion.Visibility = Visibility.Hidden;
+                ButtonGetAnswer.Margin = new Thickness(5, 184, 0, 0);
+                ButtonGetAnswer.Width = 287;
+            }
         }
 
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
         {
-            if (ButtonNextQuestion.IsEnabled == false)
+            if (ButtonNextQuestion.IsEnabled == false && ProgressBar.Value != ProgressBar.Maximum)
             {
                 ButtonNextQuestion.IsEnabled = true;
                 ButtonGetAnswer.IsEnabled = false;
             }
+            
         }
+
+        
     }
 }
