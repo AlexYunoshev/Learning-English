@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English"
         mc:Ignorable="d"
-        Title="Testing" Height="372.5" Width="312.5" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Testing" Height="275" Width="312.5" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="82" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="287"/>
 
@@ -18,7 +18,7 @@
         <TextBox x:Name="TextBoxTimerMinutes" HorizontalAlignment="Left" Height="19" Margin="138,61,0,0" TextWrapping="Wrap" Text="0 minutes" VerticalAlignment="Top" Width="146" IsReadOnly="True" IsEnabled="False"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Выбрать Unit" VerticalAlignment="Top" Width="112" TextAlignment="Center"/>
         <CheckBox x:Name="CheckBoxWordsByChance" Content="Слова вразброс" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="112" Height="16" Click="CheckBoxWordsByChance_Click"/>
-        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="25" Margin="5,205,0,0" VerticalAlignment="Top" Width="287" IsEnabled="false" ValueChanged="ProgressBar_ValueChanged"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="25" Margin="5,205,0,0" VerticalAlignment="Top" Width="287" IsEnabled="false"/>
         <TextBlock x:Name="TextBlockAllWordsCount" HorizontalAlignment="Left" Margin="5,187,0,0" TextWrapping="Wrap" Text="1/" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
         <TextBlock x:Name="TextBlockQuestion" HorizontalAlignment="Left" Margin="5,91,0,0" TextWrapping="Wrap" Text="Вопрос" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
         <TextBox x:Name="TextBoxAnswer" HorizontalAlignment="Left" Height="20" Margin="5,114,0,0" TextWrapping="Wrap" Text="Answer" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>

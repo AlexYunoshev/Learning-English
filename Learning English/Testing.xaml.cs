@@ -62,7 +62,8 @@ namespace Learning_English
             TextBlockAllWordsCount.Visibility = Visibility.Hidden;
             ButtonGetAnswer.Visibility = Visibility.Hidden;
             ButtonNextQuestion.Visibility = Visibility.Hidden;
-            ButtonNextQuestion.Margin = new Thickness(154, 184, 0, 0);
+            ButtonNextQuestion.Margin = new Thickness(154, 140, 0, 0);
+            this.Height = 225;
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -118,6 +119,9 @@ namespace Learning_English
             if (testingStart == false)
             {
                 testingStart = true;
+
+                this.Height = 275;
+
                 ButtonStartEndTesting.Visibility = Visibility.Hidden;
                 ButtonStartEndTesting.Content = "Завершить тест";
                 ProgressBar.Visibility = Visibility.Visible;
@@ -179,18 +183,7 @@ namespace Learning_English
             }
         }
 
-        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //if (ProgressBar.Value == ProgressBar.Maximum)
-            //{
-            //    ButtonGetAnswer.Margin = new Thickness(5, 184, 0, 0);
-
-
-                //testingFinal = true;
-                //ButtonStartEndTesting.Visibility = Visibility.Visible;
-                //ProgressBar.Visibility = Visibility.Hidden;
-            //}
-        }
+       
 
         private void UpdateComboBox()
         {
@@ -232,7 +225,7 @@ namespace Learning_English
             if (nowWordNumber == allWordsCount)
             {
                 ButtonNextQuestion.Visibility = Visibility.Hidden;
-                ButtonGetAnswer.Margin = new Thickness(5, 184, 0, 0);
+                ButtonGetAnswer.Margin = new Thickness(5, 140, 0, 0);
                 ButtonGetAnswer.Width = 287;
             }
         }
@@ -252,6 +245,8 @@ namespace Learning_English
                 ProgressBar.Visibility = Visibility.Hidden;
                 ButtonGetAnswer.IsEnabled = false;
                 ButtonGetAnswer.Visibility = Visibility.Hidden;
+                TextBlockAllWordsCount.Visibility = Visibility.Hidden;
+                this.Height = 225;
             }
         }
 
