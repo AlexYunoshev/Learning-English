@@ -28,14 +28,13 @@ namespace Learning_English
         private bool exit = false; // выход из окна
         private bool wordsByChance = false; // слова вразброс
         private bool getAnswer = false; // дал ли пользователь ответ на вопрос?
+
         private int time = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
         private int allWordsCount;
         private int nowWordNumber = 1;
         private int unit = 0; // 0 = All
         private int byChanceVariable = 0;
-        private IEnumerable<Learning_English.Words.Word> words;
-        private List<Word> EnglishDataList; 
-
+   
         private BindingList<Word> EnglishData; // слова
     
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
@@ -49,7 +48,6 @@ namespace Learning_English
             this.UnitsData = UnitsData;
             UpdateComboBox();
         }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -147,25 +145,8 @@ namespace Learning_English
                     }
                 }
 
-
-               
-
-
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
-
-                words = (from k in EnglishData where Convert.ToInt32(k.unit) == unit select k);
-                EnglishDataList = words.ToList();
-                //TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord ;
-                
-                TextBlockQuestion.Text = EnglishDataList[byChanceVariable].ToString();
-                //int b = 0;
-                //foreach (Word i in EnglishData)
-                //{
-                //    TextBlockQuestion.Text += EnglishData[b].translateWord;
-                //    b++;
-                //}
-
             }
 
             if (testingFinal == true)
@@ -218,11 +199,8 @@ namespace Learning_English
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
-
-
             byChanceVariable++;
-            //TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord;
-            TextBlockQuestion.Text = words.ElementAt(byChanceVariable).ToString();
+           
         }
 
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
