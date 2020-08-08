@@ -62,8 +62,9 @@ namespace Learning_English
             TextBlockAllWordsCount.Visibility = Visibility.Hidden;
             ButtonGetAnswer.Visibility = Visibility.Hidden;
             ButtonNextQuestion.Visibility = Visibility.Hidden;
-            ButtonNextQuestion.Margin = new Thickness(154, 140, 0, 0);
-            this.Height = 225;
+            ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
+            this.Height = 245;
+            TextBoxAnswer.IsReadOnly = true;
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -119,8 +120,9 @@ namespace Learning_English
             if (testingStart == false)
             {
                 testingStart = true;
+                TextBoxAnswer.IsReadOnly = false;
 
-                this.Height = 275;
+                this.Height = 295;
 
                 ButtonStartEndTesting.Visibility = Visibility.Hidden;
                 ButtonStartEndTesting.Content = "Завершить тест";
@@ -226,7 +228,7 @@ namespace Learning_English
             if (nowWordNumber == allWordsCount)
             {
                 ButtonNextQuestion.Visibility = Visibility.Hidden;
-                ButtonGetAnswer.Margin = new Thickness(5, 140, 0, 0);
+                ButtonGetAnswer.Margin = new Thickness(5, 160, 0, 0);
                 ButtonGetAnswer.Width = 287;
             }
         }
@@ -248,7 +250,7 @@ namespace Learning_English
                 ButtonGetAnswer.IsEnabled = false;
                 ButtonGetAnswer.Visibility = Visibility.Hidden;
                 TextBlockAllWordsCount.Visibility = Visibility.Hidden;
-                this.Height = 225;
+                this.Height = 245;
             }
         }
 
