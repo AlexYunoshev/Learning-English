@@ -9,7 +9,7 @@
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="82" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="287"/>
 
-        <Button x:Name="ButtonStartEndTesting" Content="Начать тест" HorizontalAlignment="Left" Margin="5,184,0,0" VerticalAlignment="Top" Width="287" Click="ButtonStartEndTesting_Click" Height="42"/>
+        <Button x:Name="ButtonStartEndTesting" Content="Начать тест" HorizontalAlignment="Left" Margin="5,140,0,0" VerticalAlignment="Top" Width="287" Click="ButtonStartEndTesting_Click" Height="42"/>
         <ComboBox x:Name="ComboBoxUnitsTesting" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="112" SelectedIndex="0" Height="25">
             <ComboBoxItem Content="All"/>
         </ComboBox>
@@ -18,13 +18,12 @@
         <TextBox x:Name="TextBoxTimerMinutes" HorizontalAlignment="Left" Height="19" Margin="138,61,0,0" TextWrapping="Wrap" Text="0 minutes" VerticalAlignment="Top" Width="146" IsReadOnly="True" IsEnabled="False"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Выбрать Unit" VerticalAlignment="Top" Width="112" TextAlignment="Center"/>
         <CheckBox x:Name="CheckBoxWordsByChance" Content="Слова вразброс" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Width="112" Height="16" Click="CheckBoxWordsByChance_Click"/>
-        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="25" Margin="5,92,0,0" VerticalAlignment="Top" Width="287" IsEnabled="false" ValueChanged="ProgressBar_ValueChanged"/>
-        <TextBlock x:Name="TextBlockAllWordsCount" HorizontalAlignment="Left" Margin="5,117,0,0" TextWrapping="Wrap" Text="1/" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
-        <TextBlock x:Name="TextBlockQuestion" HorizontalAlignment="Left" Margin="5,138,0,0" TextWrapping="Wrap" Text="Вопрос" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
-        <TextBox x:Name="TextBoxAnswer" HorizontalAlignment="Left" Height="20" Margin="5,159,0,0" TextWrapping="Wrap" Text="Answer" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
-        <Button x:Name="ButtonNextQuestion" Content="Далее" HorizontalAlignment="Left" Margin="154,184,0,0" VerticalAlignment="Top" Width="138" Height="42
-                " Click="ButtonNextQuestion_Click"/>
-        <Button x:Name="ButtonGetAnswer" Content="Ответить" HorizontalAlignment="Left" Margin="5,184,0,0" VerticalAlignment="Top" Width="138" Height="42" Click="ButtonGetAnswer_Click"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="25" Margin="5,205,0,0" VerticalAlignment="Top" Width="287" IsEnabled="false" ValueChanged="ProgressBar_ValueChanged"/>
+        <TextBlock x:Name="TextBlockAllWordsCount" HorizontalAlignment="Left" Margin="5,187,0,0" TextWrapping="Wrap" Text="1/" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
+        <TextBlock x:Name="TextBlockQuestion" HorizontalAlignment="Left" Margin="5,91,0,0" TextWrapping="Wrap" Text="Вопрос" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
+        <TextBox x:Name="TextBoxAnswer" HorizontalAlignment="Left" Height="20" Margin="5,114,0,0" TextWrapping="Wrap" Text="Answer" VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
+        <Button x:Name="ButtonNextQuestion" Content="Далее" HorizontalAlignment="Left" Margin="154,140,0,0" VerticalAlignment="Top" Width="138" Height="42" Click="ButtonNextQuestion_Click"/>
+        <Button x:Name="ButtonGetAnswer" Content="Ответить" HorizontalAlignment="Left" Margin="5,140,0,0" VerticalAlignment="Top" Width="138" Height="42" Click="ButtonGetAnswer_Click"/>
 
     </Grid>
 </Window>
