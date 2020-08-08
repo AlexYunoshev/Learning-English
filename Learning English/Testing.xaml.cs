@@ -212,6 +212,9 @@ namespace Learning_English
         private void ButtonNextQuestion_Click(object sender, RoutedEventArgs e)
         {
             TextBoxAnswer.IsReadOnly = false;
+            TextBoxAnswer.Foreground = Brushes.Black;
+            TextBoxAnswer.Text = "";
+            TextBlockCorrectAnswer.Text = "Correct answer: ";
             nowWordNumber++;
             ProgressBar.Value = nowWordNumber;
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
@@ -252,6 +255,20 @@ namespace Learning_English
                 TextBlockAllWordsCount.Visibility = Visibility.Hidden;
                 this.Height = 245;
             }
+
+
+            if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+            {
+                TextBoxAnswer.Foreground = Brushes.Green;
+               
+            }
+            else
+            {
+                TextBoxAnswer.Foreground = Brushes.Red;
+            }
+            TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[byChanceVariable].englishWord;
+
+
         }
 
         
