@@ -151,13 +151,20 @@ namespace Learning_English
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
 
-                foreach (Word n in EnglishData)
+                if (unit != 0)
                 {
-                    EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == unit) select k).ToList();
+                    foreach (Word n in EnglishData)
+                    {
+                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == unit) select k).ToList();
+                    }
 
+                    TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
                 }
+                else
+                    TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
 
-                TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+
+
 
             }
 
@@ -212,7 +219,12 @@ namespace Learning_English
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
             byChanceVariable++;
-            TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+            if (unit != 0)
+            {
+                TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+            }
+            else
+                TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
 
         }
 
