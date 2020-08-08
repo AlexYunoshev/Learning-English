@@ -186,9 +186,9 @@ namespace Learning_English
             //    ButtonGetAnswer.Margin = new Thickness(5, 184, 0, 0);
 
 
-            //    //testingFinal = true;
-            //    //ButtonStartEndTesting.Visibility = Visibility.Visible;
-            //    //ProgressBar.Visibility = Visibility.Hidden;
+                //testingFinal = true;
+                //ButtonStartEndTesting.Visibility = Visibility.Visible;
+                //ProgressBar.Visibility = Visibility.Hidden;
             //}
         }
 
@@ -244,7 +244,15 @@ namespace Learning_English
                 ButtonNextQuestion.IsEnabled = true;
                 ButtonGetAnswer.IsEnabled = false;
             }
-            
+
+            if (nowWordNumber == allWordsCount)
+            {
+                testingFinal = true;
+                ButtonStartEndTesting.Visibility = Visibility.Visible;
+                ProgressBar.Visibility = Visibility.Hidden;
+                ButtonGetAnswer.IsEnabled = false;
+                ButtonGetAnswer.Visibility = Visibility.Hidden;
+            }
         }
 
         
