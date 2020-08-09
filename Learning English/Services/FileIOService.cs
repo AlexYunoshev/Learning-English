@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Learning_English.Classes;
 
 namespace Learning_English.Services
 {
@@ -14,12 +15,13 @@ namespace Learning_English.Services
     {
         private readonly string pathWords;
         private readonly string pathUnits;
+        private readonly string pathStatistic;
 
-
-        public FileIOService(string pathWords, string pathUnits)
+        public FileIOService(string pathWords, string pathUnits, string pathStatistic)
         {
             this.pathWords = pathWords;
             this.pathUnits = pathUnits;
+            this.pathStatistic = pathStatistic;
         }
 
         public BindingList<Word> LoadDataWords()
@@ -52,9 +54,6 @@ namespace Learning_English.Services
             }
         }
 
-
-
-
         public void SaveDataUnits(object UnitsData)
         {
             using (StreamWriter writer = File.CreateText(pathUnits))
@@ -64,13 +63,6 @@ namespace Learning_English.Services
             }
         }
 
-
-
-
-
-
-
-
         public void SaveDataWords(object English_Data)
         {
             using (StreamWriter writer = File.CreateText(pathWords))
@@ -79,5 +71,16 @@ namespace Learning_English.Services
                 writer.Write(output);
             }
         }
+
+        public void SaveStatisticData(List<int> list)
+        {
+            using (StreamWriter writer = File.CreateText(pathStatistic))
+            {
+                string output = JsonConvert.SerializeObject(list);
+                writer.Write(output);
+            }
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Learning_English.Services;
+using Learning_English.Classes;
 using Learning_English.Words;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Learning_English
     {
         private readonly string pathWords = $"{Environment.CurrentDirectory}\\WordsList.json";
         private readonly string pathUnits = $"{Environment.CurrentDirectory}\\UnitList.json";
+        private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json";
         private BindingList<Word> EnglishData;
         private List<int> UnitsData = new List<int>();
         private FileIOService fileIOService;
@@ -39,7 +41,7 @@ namespace Learning_English
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            fileIOService = new FileIOService(pathWords, pathUnits);
+            fileIOService = new FileIOService(pathWords, pathUnits, pathStatistic);
 
             try
             {
@@ -160,6 +162,23 @@ namespace Learning_English
             {
                 fileIOService.SaveDataUnits(UnitsData);
                 MessageBox.Show("Save");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                List<int> list = new List<int>();
+                list.Add(StatisticData.AllWordsCount);
+                list.Add(StatisticData.CorrectWordsCount);
+                fileIOService.SaveStatisticData(list);
+            
             }
             catch (Exception ex)
             {

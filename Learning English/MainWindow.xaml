@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English" xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded">
+        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" Closing="Window_Closing">
     <DockPanel>
         <StackPanel DockPanel.Dock="Right" Margin="10">
             <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
