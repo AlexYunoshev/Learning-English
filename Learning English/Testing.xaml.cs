@@ -33,7 +33,8 @@ namespace Learning_English
         private int nowWordNumber = 1;
         private int unit = 0; // 0 = All
         private int byChanceVariable = 0;
-   
+        private int correctAnswerCount = 0;
+
         private BindingList<Word> EnglishData; // слова
 
         private List<Word> EnglishDataFiltered = new List<Word>();
@@ -80,8 +81,12 @@ namespace Learning_English
             }
             else
             {
+                MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
+
+                
+
             }
         }
 
@@ -244,6 +249,7 @@ namespace Learning_English
                 if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
+                    correctAnswerCount++;
                 }
                 else
                 {
@@ -256,6 +262,7 @@ namespace Learning_English
                 if (string.Equals(EnglishData[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
+                    correctAnswerCount++;
                 }
                 else
                 {
