@@ -91,8 +91,6 @@ namespace Learning_English
             TextBoxTimerMinutes.Text = time.ToString() + " minutes";
         }
 
-
-
         private void CheckBoxTimerMinutes_Click(object sender, RoutedEventArgs e)
         {
             if (CheckBoxTimerMinutes.IsChecked == true)
@@ -109,8 +107,6 @@ namespace Learning_English
                 TextBoxTimerMinutes.Text = time.ToString() + " minutes";
             }
         }
-
-       
 
         private void ButtonStartEndTesting_Click(object sender, RoutedEventArgs e)
         {
@@ -173,8 +169,6 @@ namespace Learning_English
                 this.Close();
             }
         }
-
-       
 
         private void UpdateComboBox()
         {
@@ -245,13 +239,11 @@ namespace Learning_English
                 this.Height = 245;
             }
 
-
             if (unit != 0)
             {
                 if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
-
                 }
                 else
                 {
@@ -264,7 +256,6 @@ namespace Learning_English
                 if (string.Equals(EnglishData[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
-
                 }
                 else
                 {
@@ -272,12 +263,6 @@ namespace Learning_English
                 }
                 TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[byChanceVariable].englishWord;
             }
-
-            
-
-
-        }
-
-        
+        } 
     }
 }
