@@ -82,8 +82,8 @@ namespace Learning_English
             }
             else
             {
-                StatisticData.AllWordsCount = allWordsCount;
-                StatisticData.CorrectWordsCount = correctAnswerCount;
+                StatisticData.AllWordsCount += allWordsCount;
+                StatisticData.CorrectWordsCount += correctAnswerCount;
                 MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
