@@ -47,6 +47,9 @@ namespace Learning_English
             {
                 EnglishData = fileIOService.LoadDataWords();
                 UnitsData = fileIOService.LoadDataUnits();
+                List<int> statisticData = fileIOService.LoadStatisticData();
+                StatisticData.AllWordsCount = statisticData[0];
+                StatisticData.CorrectWordsCount = statisticData[1];
             }
             catch (Exception ex)
             {
@@ -172,19 +175,19 @@ namespace Learning_English
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            try
-            {
-                List<int> list = new List<int>();
-                list.Add(StatisticData.AllWordsCount);
-                list.Add(StatisticData.CorrectWordsCount);
-                fileIOService.SaveStatisticData(list);
+            //try
+            //{
+            //    List<int> list = new List<int>();
+            //    list.Add(StatisticData.AllWordsCount);
+            //    list.Add(StatisticData.CorrectWordsCount);
+            //    fileIOService.SaveStatisticData(list);
             
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    Close();
+            //}
         }
     }
 }

@@ -81,6 +81,21 @@ namespace Learning_English.Services
             }
         }
 
+        public List<int> LoadStatisticData()
+        {
+            var fileExists = File.Exists(pathStatistic);
+            if (!fileExists)
+            {
+                File.CreateText(pathStatistic).Dispose();
+                return new List<int>();
+            }
+            using (var reader = File.OpenText(pathStatistic))
+            {
+                var fileText = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<List<int>>(fileText);
+            }
+        }
+
 
     }
 }
