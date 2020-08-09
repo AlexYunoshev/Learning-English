@@ -22,7 +22,6 @@ namespace Learning_English
     /// </summary>
     public partial class Testing : Window
     {
-        
         private bool testingStart = false; // начало тестирования
         private bool testingFinal = false; // в тесте пройдены все слова
         private bool exit = false; // выход из окна
@@ -41,8 +40,6 @@ namespace Learning_English
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
         private List<int> IndexOfWords = new List<int>(); // использованные индексы слов
         
-
-
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
             InitializeComponent();
@@ -168,20 +165,12 @@ namespace Learning_English
                 }
                 else
                     TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
-
-
-
-
             }
 
             if (testingFinal == true)
             {
-                System.Windows.MessageBoxResult result = MessageBox.Show("Вы действительно хотите завершить тест?", "ВНИМАНИЕ", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    exit = true;
-                    this.Close();
-                }
+                exit = true;
+                this.Close();
             }
         }
 
