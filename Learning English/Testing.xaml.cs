@@ -1,4 +1,5 @@
-﻿using Learning_English.Words;
+﻿using Learning_English.Classes;
+using Learning_English.Words;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,6 +82,8 @@ namespace Learning_English
             }
             else
             {
+                StatisticData.AllWordsCount = allWordsCount;
+                StatisticData.CorrectWordsCount = correctAnswerCount;
                 MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
@@ -251,6 +254,7 @@ namespace Learning_English
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
                     correctAnswerCount++;
+                    
                 }
                 else
                 {

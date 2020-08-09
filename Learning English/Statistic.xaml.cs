@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Learning_English.Classes;
 
 namespace Learning_English
 {
@@ -28,6 +29,13 @@ namespace Learning_English
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlockAllWordsCount.Text = "Всего вопросов: " + StatisticData.AllWordsCount;
+            TextBlockCorrectWordsCount.Text = "Правильных ответов: " + StatisticData.CorrectWordsCount;
+            TextBlockIncorrectWordsCount.Text = "Неправильных ответов: " + (StatisticData.AllWordsCount - StatisticData.CorrectWordsCount);
         }
     }
 }

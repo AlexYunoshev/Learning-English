@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\StatisticData.cs" />
     <Compile Include="Services\FileIOService.cs" />
     <Compile Include="Classes\Word.cs" />
     <Compile Include="Statistic.xaml.cs">
