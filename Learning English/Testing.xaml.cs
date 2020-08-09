@@ -203,6 +203,7 @@ namespace Learning_English
             TextBoxAnswer.Foreground = Brushes.Black;
             TextBoxAnswer.Text = "";
             TextBlockCorrectAnswer.Text = "Correct answer: ";
+            TextBlockCorrectAnswer.FontWeight = FontWeights.Normal;
             nowWordNumber++;
             ProgressBar.Value = nowWordNumber;
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
@@ -243,7 +244,7 @@ namespace Learning_English
                 TextBlockAllWordsCount.Visibility = Visibility.Hidden;
                 this.Height = 245;
             }
-
+            TextBlockCorrectAnswer.FontWeight = FontWeights.Bold;
             if (unit != 0)
             {
                 if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
