@@ -132,6 +132,9 @@ namespace Learning_English
         private void Button_Statistic_Click(object sender, RoutedEventArgs e)
         {
             dgEnglish.Visibility = Visibility.Hidden;
+            Statistic statistic = new Statistic();
+            statistic.Show();
+            this.Close();
         }
 
         private void UpdateDG()

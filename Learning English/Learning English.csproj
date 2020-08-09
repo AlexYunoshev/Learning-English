@@ -60,6 +60,9 @@
     </ApplicationDefinition>
     <Compile Include="Services\FileIOService.cs" />
     <Compile Include="Classes\Word.cs" />
+    <Compile Include="Statistic.xaml.cs">
+      <DependentUpon>Statistic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Testing.xaml.cs">
       <DependentUpon>Testing.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Statistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Testing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GB.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="statistic.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
