@@ -111,8 +111,6 @@ namespace Learning_English
                 mainWindow.Show();
 
 
-               
-                //asdsaaaaaaaaaaaaaaaaaaaaaaa
 
             }
         }
@@ -200,6 +198,8 @@ namespace Learning_English
                 exit = true;
                 this.Close();
             }
+
+            IsTheLastQuestion();
         }
 
         private void UpdateComboBox()
@@ -244,6 +244,11 @@ namespace Learning_English
             else
                 TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
 
+            IsTheLastQuestion();
+        }
+
+        private void IsTheLastQuestion()
+        {
             if (nowWordNumber == allWordsCount)
             {
                 ButtonNextQuestion.Visibility = Visibility.Hidden;
