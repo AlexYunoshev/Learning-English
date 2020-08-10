@@ -1,4 +1,5 @@
 ﻿using Learning_English.Classes;
+using Learning_English.Services;
 using Learning_English.Words;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,11 @@ namespace Learning_English
         private List<Word> EnglishDataFiltered = new List<Word>();
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
         private List<int> IndexOfWords = new List<int>(); // использованные индексы слов
-        
+
+        private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json";
+        private FileIOService fileIOService;
+
+
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
             InitializeComponent();
@@ -85,10 +90,30 @@ namespace Learning_English
                 StatisticData.AllWordsCount += allWordsCount;
                 StatisticData.CorrectWordsCount += correctAnswerCount;
                 MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
+
+
+                fileIOService = new FileIOService(pathStatistic);
+
+                try
+                {
+                    List<int> list = new List<int>();
+                    list.Add(StatisticData.AllWordsCount);
+                    list.Add(StatisticData.CorrectWordsCount);
+                    fileIOService.SaveStatisticData(list);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Close();
+                }
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
 
-                
+
+               
+                //asdsaaaaaaaaaaaaaaaaaaaaaaa
 
             }
         }

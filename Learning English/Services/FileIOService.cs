@@ -24,6 +24,11 @@ namespace Learning_English.Services
             this.pathStatistic = pathStatistic;
         }
 
+        public FileIOService(string pathStatistic)
+        {
+            this.pathStatistic = pathStatistic;
+        }
+
         public BindingList<Word> LoadDataWords()
         {
             var fileExists = File.Exists(pathWords);

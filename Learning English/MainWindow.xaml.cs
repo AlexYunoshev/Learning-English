@@ -173,21 +173,6 @@ namespace Learning_English
             }
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            //try
-            //{
-            //    List<int> list = new List<int>();
-            //    list.Add(StatisticData.AllWordsCount);
-            //    list.Add(StatisticData.CorrectWordsCount);
-            //    fileIOService.SaveStatisticData(list);
-            
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    Close();
-            //}
-        }
+        
     }
 }
