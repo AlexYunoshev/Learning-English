@@ -27,23 +27,25 @@ namespace Learning_English
         private bool testingStart = false; // начало тестирования
         private bool testingFinal = false; // в тесте пройдены все слова
         private bool exit = false; // выход из окна
-        private bool wordsByChance = false; // слова вразброс
+        private bool wordsByChance = false; // слова вразброс ДА или НЕТ (по умолчанию нет)
 
         private int time = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
-        private int allWordsCount;
-        private int nowWordNumber = 1;
-        private int unit = 0; // 0 = All
-        private int byChanceVariable = 0;
-        private int correctAnswerCount = 0;
+        private int allWordsCount; // количество всех вопросов (всех слов)
+        private int nowWordNumber = 1; // текущий вопрос (текущее слово)
+        private int unit = 0; // 0 = All текущий юнит
+        private int wordIndex = 0; // индекс слова в коллекции
+        private int correctAnswerCount = 0; // количество правильных ответов = 0
 
-        private BindingList<Word> EnglishData; // слова
+        private BindingList<Word> EnglishData; // коллекция словаря
 
-        private List<Word> EnglishDataFiltered = new List<Word>();
+        private List<Word> EnglishDataFiltered = new List<Word>(); // коллекция отфильтрованного словаря
+
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
-        private List<int> IndexOfWords = new List<int>(); // использованные индексы слов
+        private List<int> IndexOfWords = new List<int>(); // коллекция использованных индексов слов (если включены слова вразброс)
 
-        private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json";
-        private FileIOService fileIOService;
+        private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json"; // путь файла "статистика"
+
+        private FileIOService fileIOService; 
 
 
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
@@ -187,10 +189,10 @@ namespace Learning_English
                         EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == unit) select k).ToList();
                     }
 
-                    TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].translateWord.ToString();
                 }
                 else
-                    TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
+                    TextBlockQuestion.Text = EnglishData[wordIndex].translateWord.ToString();
             }
 
             if (testingFinal == true)
@@ -236,13 +238,13 @@ namespace Learning_English
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
-            byChanceVariable++;
+            wordIndex++;
             if (unit != 0)
             {
-                TextBlockQuestion.Text = EnglishDataFiltered[byChanceVariable].translateWord.ToString();
+                TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].translateWord.ToString();
             }
             else
-                TextBlockQuestion.Text = EnglishData[byChanceVariable].translateWord.ToString();
+                TextBlockQuestion.Text = EnglishData[wordIndex].translateWord.ToString();
 
             IsTheLastQuestion();
         }
@@ -279,7 +281,7 @@ namespace Learning_English
             TextBlockCorrectAnswer.FontWeight = FontWeights.Bold;
             if (unit != 0)
             {
-                if (string.Equals(EnglishDataFiltered[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+                if (string.Equals(EnglishDataFiltered[wordIndex].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
                     correctAnswerCount++;
@@ -289,11 +291,11 @@ namespace Learning_English
                 {
                     TextBoxAnswer.Foreground = Brushes.Red;
                 }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[byChanceVariable].englishWord;
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[wordIndex].englishWord;
             }
             else
             {
-                if (string.Equals(EnglishData[byChanceVariable].englishWord, TextBoxAnswer.Text) == true)
+                if (string.Equals(EnglishData[wordIndex].englishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
                     correctAnswerCount++;
@@ -302,7 +304,7 @@ namespace Learning_English
                 {
                     TextBoxAnswer.Foreground = Brushes.Red;
                 }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[byChanceVariable].englishWord;
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].englishWord;
             }
         } 
     }
