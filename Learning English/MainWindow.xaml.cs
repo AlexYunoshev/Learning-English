@@ -37,12 +37,12 @@ namespace Learning_English
         public MainWindow()
         {
             InitializeComponent();
+            fileIOService = new FileIOService(pathWords, pathUnits, pathStatistic);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            fileIOService = new FileIOService(pathWords, pathUnits, pathStatistic);
-
+            // начальная загрузка всех данных (обновление) //
             try
             {
                 EnglishData = fileIOService.LoadDataWords();
@@ -57,37 +57,23 @@ namespace Learning_English
                 Close();
             }
 
-            UpdateComboBox();
+            UpdateComboBox(); // обновить элементы комбобокс (юниты) //
 
-            dgEnglish.ItemsSource = EnglishData;
+            dgEnglish.ItemsSource = EnglishData; // таблица словника берет информацию из биндинг листа "англ данные"
             EnglishData.ListChanged += English_Data_ListChanged;
         }
 
-        private void UpdateComboBox()
-        {
-            UnitsData.Sort();
-            ComboBoxUnits.Items.Clear();
-            ComboBoxUnits.Items.Add("All");
-            int a = 0;
-            foreach (int i in UnitsData)
-            {
-                ComboBoxUnits.Items.Add(UnitsData[a].ToString());
-                a++;
-            }
-            ComboBoxUnits.SelectedIndex = 0;
-        }
+      
 
         private void English_Data_ListChanged(object sender, ListChangedEventArgs e)
         {
-            
-
             if (e.ListChangedType == ListChangedType.ItemAdded || 
                 e.ListChangedType == ListChangedType.ItemDeleted || 
                 e.ListChangedType == ListChangedType.ItemChanged)
             {
                 try
                 {
-                   fileIOService.SaveDataWords(sender);
+                   fileIOService.SaveDataWords(sender); // сохранение таблицы слов //
                 }
                 catch (Exception ex)
                 {
@@ -96,32 +82,11 @@ namespace Learning_English
                 }
             }
 
-
-
-            UnitsData.Clear();
-            int a = 0;
-            foreach (Word i in EnglishData)
-            {
-                int var = Convert.ToInt32(EnglishData[a].unit);
-                if (UnitsData.IndexOf(var) == -1 && var > 0)
-                {
-                    UnitsData.Add(var);
-                }
-                a++;
-            }
-
-            try
-            {
-                fileIOService.SaveDataUnits(UnitsData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
-            }
+            UpdateUnitsData();
             UpdateComboBox();
-
         }
+
+       
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
@@ -173,6 +138,45 @@ namespace Learning_English
             }
         }
 
-        
+
+        private void UpdateComboBox()
+        {
+            UnitsData.Sort();
+            ComboBoxUnits.Items.Clear();
+            ComboBoxUnits.Items.Add("All");
+            int a = 0;
+            foreach (int i in UnitsData)
+            {
+                ComboBoxUnits.Items.Add(UnitsData[a].ToString());
+                a++;
+            }
+            ComboBoxUnits.SelectedIndex = 0;
+        }
+
+
+        private void UpdateUnitsData()
+        {
+            UnitsData.Clear();
+            int a = 0;
+            foreach (Word i in EnglishData)
+            {
+                int var = Convert.ToInt32(EnglishData[a].unit);
+                if (UnitsData.IndexOf(var) == -1 && var > 0)
+                {
+                    UnitsData.Add(var);
+                }
+                a++;
+            }
+
+            try
+            {
+                fileIOService.SaveDataUnits(UnitsData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+        }
     }
 }
