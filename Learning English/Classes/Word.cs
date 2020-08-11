@@ -15,6 +15,11 @@ namespace Learning_English.Words
        
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public string EnglishWord
         {
             get { return englishWord; }
@@ -26,7 +31,6 @@ namespace Learning_English.Words
                 OnPropertyChanged("EnglishWord");
             }
         }
-
 
         public string TranslateWord
         {
@@ -50,13 +54,6 @@ namespace Learning_English.Words
                 unit = value;
                 OnPropertyChanged("Unit");
             }
-        }
-
-        
-
-        protected virtual void OnPropertyChanged(string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
