@@ -171,7 +171,7 @@ namespace Learning_English
                     allWordsCount = 0;
                     foreach (Word i in EnglishData)
                     {
-                        if (Convert.ToInt32(EnglishData[a].unit) == unit)
+                        if (Convert.ToInt32(EnglishData[a].Unit) == unit)
                         {
                             allWordsCount++;
                         }
@@ -186,13 +186,13 @@ namespace Learning_English
                 {
                     foreach (Word n in EnglishData)
                     {
-                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.unit) == unit) select k).ToList();
+                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unit) select k).ToList();
                     }
 
-                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].translateWord.ToString();
+                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
                 }
                 else
-                    TextBlockQuestion.Text = EnglishData[wordIndex].translateWord.ToString();
+                    TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
             }
 
             if (testingFinal == true)
@@ -241,10 +241,10 @@ namespace Learning_English
             wordIndex++;
             if (unit != 0)
             {
-                TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].translateWord.ToString();
+                TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
             }
             else
-                TextBlockQuestion.Text = EnglishData[wordIndex].translateWord.ToString();
+                TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
 
             IsTheLastQuestion();
         }
@@ -281,7 +281,7 @@ namespace Learning_English
             TextBlockCorrectAnswer.FontWeight = FontWeights.Bold;
             if (unit != 0)
             {
-                if (string.Equals(EnglishDataFiltered[wordIndex].englishWord, TextBoxAnswer.Text) == true)
+                if (string.Equals(EnglishDataFiltered[wordIndex].EnglishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
                     correctAnswerCount++;
@@ -291,11 +291,11 @@ namespace Learning_English
                 {
                     TextBoxAnswer.Foreground = Brushes.Red;
                 }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[wordIndex].englishWord;
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[wordIndex].EnglishWord;
             }
             else
             {
-                if (string.Equals(EnglishData[wordIndex].englishWord, TextBoxAnswer.Text) == true)
+                if (string.Equals(EnglishData[wordIndex].EnglishWord, TextBoxAnswer.Text) == true)
                 {
                     TextBoxAnswer.Foreground = Brushes.Green;
                     correctAnswerCount++;
@@ -304,7 +304,7 @@ namespace Learning_English
                 {
                     TextBoxAnswer.Foreground = Brushes.Red;
                 }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].englishWord;
+                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].EnglishWord;
             }
         } 
     }

@@ -9,9 +9,9 @@ namespace Learning_English.Words
 {
     public class Word: INotifyPropertyChanged
     {
-        public string englishWord;
-        public string translateWord;
-        public string unit;
+        private string englishWord;
+        private string translateWord;
+        private string unit;
        
         public event PropertyChangedEventHandler PropertyChanged;
 

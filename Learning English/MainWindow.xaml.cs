@@ -116,7 +116,7 @@ namespace Learning_English
             if (index == 0)
                 dgEnglish.ItemsSource = EnglishData;
             else 
-                dgEnglish.ItemsSource = from k in EnglishData where Convert.ToInt32(k.unit) == index select k;
+                dgEnglish.ItemsSource = from k in EnglishData where Convert.ToInt32(k.Unit) == index select k;
         }
 
         private void Button_ChooseUnit_Click(object sender, RoutedEventArgs e)
@@ -160,7 +160,7 @@ namespace Learning_English
             int a = 0;
             foreach (Word i in EnglishData)
             {
-                int var = Convert.ToInt32(EnglishData[a].unit);
+                int var = Convert.ToInt32(EnglishData[a].Unit);
                 if (UnitsData.IndexOf(var) == -1 && var > 0)
                 {
                     UnitsData.Add(var);
