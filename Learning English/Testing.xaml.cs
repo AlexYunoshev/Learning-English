@@ -173,24 +173,7 @@ namespace Learning_English
                 SliderTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.IsEnabled = false;
                 ButtonNextQuestion.IsEnabled = false;
-               
-                if (unit > 0)
-                {
-                    int a = 0;
-                    allWordsCount = 0;
-                    foreach (Word i in EnglishData)
-                    {
-                        if (Convert.ToInt32(EnglishData[a].Unit) == unit)
-                        {
-                            allWordsCount++;
-                        }
-                        a++;
-                    }
-                }
-
-                TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-                ProgressBar.Maximum = allWordsCount;
-
+              
                 if (unit != 0)
                 {
                     foreach (Word n in EnglishData)
@@ -198,10 +181,17 @@ namespace Learning_English
                         EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unit) select k).ToList();
                     }
 
+                    allWordsCount = EnglishDataFiltered.Count;
+
                     TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
                 }
                 else
+                {
                     TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
+                }
+                    
+                TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
+                ProgressBar.Maximum = allWordsCount;
             }
 
             if (testingFinal == true)
@@ -258,6 +248,11 @@ namespace Learning_English
             IsTheLastQuestion();
         }
 
+        /* 
+        Метод проверяет очередность данного вопроса: последний или нет. 
+        Если вопрос последний (так же если в тесте всего 1 вопрос), то не должно быть кнопки далее
+        Должна быть только кнопка ответить 
+        */
         private void IsTheLastQuestion()
         {
             if (nowWordNumber == allWordsCount)
@@ -268,6 +263,7 @@ namespace Learning_English
             }
         }
 
+        // кнопка Ответить //////////////////////////////////////////////////////////////
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
         {
             if (ButtonNextQuestion.IsEnabled == false && ProgressBar.Value != ProgressBar.Maximum)
