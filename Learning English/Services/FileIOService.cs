@@ -13,9 +13,9 @@ namespace Learning_English.Services
 {
     class FileIOService
     {
-        private readonly string pathWords; /// путь к файлу со словами
-        private readonly string pathUnits; /// путь к файлу с юнитами
-        private readonly string pathStatistic; /// путь к файлу статистики
+        private readonly string pathWords; // путь к файлу со словами
+        private readonly string pathUnits; // путь к файлу с юнитами
+        private readonly string pathStatistic; // путь к файлу статистики
 
         public FileIOService(string pathWords, string pathUnits, string pathStatistic)
         {
@@ -29,10 +29,7 @@ namespace Learning_English.Services
             this.pathStatistic = pathStatistic;
         }
 
-        /// <summary>
-        /// Метод загрузки слов
-        /// </summary>
-        /// <returns>Возвращает коллекцию BindingList</returns>
+        // Метод загрузки слов
         public BindingList<Word> LoadDataWords()
         {
             var fileExists = File.Exists(pathWords);
@@ -48,6 +45,7 @@ namespace Learning_English.Services
             }
         }
 
+        // Метод сохранения слов
         public void SaveDataWords(object English_Data)
         {
             using (StreamWriter writer = File.CreateText(pathWords))
@@ -57,6 +55,7 @@ namespace Learning_English.Services
             }
         }
 
+        // Метод загрузки юнитов
         public List<int> LoadDataUnits()
         {
             var fileExists = File.Exists(pathUnits);
@@ -72,6 +71,7 @@ namespace Learning_English.Services
             }
         }
 
+        // Метод сохранения юнитов
         public void SaveDataUnits(object UnitsData)
         {
             using (StreamWriter writer = File.CreateText(pathUnits))
@@ -81,6 +81,7 @@ namespace Learning_English.Services
             }
         }
 
+        // Метод загрузки статистики
         public List<int> LoadStatisticData()
         {
             var fileExists = File.Exists(pathStatistic);
@@ -96,6 +97,7 @@ namespace Learning_English.Services
             }
         }
 
+        // Метод сохранения статистики
         public void SaveStatisticData(List<int> list)
         {
             using (StreamWriter writer = File.CreateText(pathStatistic))
