@@ -75,6 +75,7 @@ namespace Learning_English
             ButtonNextQuestion.Visibility = Visibility.Hidden;
             ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
         }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (exit == false)
@@ -96,7 +97,6 @@ namespace Learning_English
                 StatisticData.CorrectWordsCount += correctAnswerCount;
                 MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
 
-
                 fileIOService = new FileIOService(pathStatistic);
 
                 try
@@ -115,9 +115,6 @@ namespace Learning_English
 
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-
-
-
             }
         }
 
@@ -136,10 +133,12 @@ namespace Learning_English
             }
             else
             {
-                SliderTimerMinutes.IsEnabled = false;
-                TextBoxTimerMinutes.IsEnabled = false;
                 time = 0;
+
                 SliderTimerMinutes.Value = 0;
+                SliderTimerMinutes.IsEnabled = false;
+
+                TextBoxTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.Text = time.ToString() + " minutes";
             }
         }
@@ -148,18 +147,25 @@ namespace Learning_English
         {
             if (testingStart == false)
             {
-                testingStart = true;
-                TextBoxAnswer.IsReadOnly = false;
-
                 this.Height = 295;
+
+                testingStart = true;
+
+                unit = ComboBoxUnitsTesting.SelectedIndex;
+
+                TextBoxAnswer.IsReadOnly = false;
+                TextBoxAnswer.Text = "";
+
+                TextBlockAllWordsCount.Visibility = Visibility.Visible;
 
                 ButtonStartEndTesting.Visibility = Visibility.Hidden;
                 ButtonStartEndTesting.Content = "Завершить тест";
-                ProgressBar.Visibility = Visibility.Visible;
-                TextBlockAllWordsCount.Visibility = Visibility.Visible;
+
                 ButtonNextQuestion.Visibility = Visibility.Visible;
+
                 ButtonGetAnswer.Visibility = Visibility.Visible;
-                unit = ComboBoxUnitsTesting.SelectedIndex;
+
+                ProgressBar.Visibility = Visibility.Visible;
 
                 ComboBoxUnitsTesting.IsEnabled = false;
                 CheckBoxWordsByChance.IsEnabled = false;
@@ -167,8 +173,7 @@ namespace Learning_English
                 SliderTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.IsEnabled = false;
                 ButtonNextQuestion.IsEnabled = false;
-                TextBoxAnswer.Text = "";
-
+               
                 if (unit > 0)
                 {
                     int a = 0;
