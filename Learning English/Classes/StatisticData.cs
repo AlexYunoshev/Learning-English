@@ -8,8 +8,8 @@ namespace Learning_English.Classes
 {
     public static class StatisticData
     {
-        private static int allWordsCount = 0;
-        private static int correctWordsCount = 0;
+        private static int allWordsCount = 0; // количество всех вопросов (слов)
+        private static int correctWordsCount = 0; // количество правильных ответов на вопросы (слова)
 
         public static int AllWordsCount
         {

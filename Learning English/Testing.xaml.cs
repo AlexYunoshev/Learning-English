@@ -43,33 +43,37 @@ namespace Learning_English
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
         private List<int> IndexOfWords = new List<int>(); // коллекция использованных индексов слов (если включены слова вразброс)
 
+        private FileIOService fileIOService;
+
         private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json"; // путь файла "статистика"
-
-        private FileIOService fileIOService; 
-
 
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
             InitializeComponent();
-            allWordsCount = EnglishData.Count;
-            this.EnglishData = EnglishData;
-            this.UnitsData = UnitsData;
-            UpdateComboBox();
+            allWordsCount = EnglishData.Count; // количество всех слов
+            this.EnglishData = EnglishData; // коллекция слов
+            this.UnitsData = UnitsData; // коллекция юнитов
+            UpdateComboBox(); 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
+            this.Height = 245;
+
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = allWordsCount;
             ProgressBar.Value = 1;
             ProgressBar.Visibility = Visibility.Hidden;
+
+            TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
             TextBlockAllWordsCount.Visibility = Visibility.Hidden;
+
+            TextBoxAnswer.IsReadOnly = true;
+
             ButtonGetAnswer.Visibility = Visibility.Hidden;
+
             ButtonNextQuestion.Visibility = Visibility.Hidden;
             ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
-            this.Height = 245;
-            TextBoxAnswer.IsReadOnly = true;
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
