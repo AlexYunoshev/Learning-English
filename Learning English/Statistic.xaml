@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English"
         mc:Ignorable="d"
-        Title="Statistic" Height="105" Width="230" ResizeMode="NoResize" Icon="statistic.ico" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Statistic" Height="110" Width="230" ResizeMode="NoResize" Icon="statistic.ico" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <TextBlock x:Name="TextBlockAllWordsCount" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Всего вопросов: " VerticalAlignment="Top"/>
         <TextBlock x:Name="TextBlockCorrectWordsCount" HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="Правильных ответов:" VerticalAlignment="Top"/>
