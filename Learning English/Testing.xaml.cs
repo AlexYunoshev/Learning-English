@@ -152,6 +152,7 @@ namespace Learning_English
                 testingStart = true;
 
                 unit = ComboBoxUnitsTesting.SelectedIndex;
+                wordsByChance = (bool)CheckBoxWordsByChance.IsChecked;
 
                 TextBoxAnswer.IsReadOnly = false;
                 TextBoxAnswer.Text = "";
@@ -311,6 +312,41 @@ namespace Learning_English
                 }
                 TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].EnglishWord;
             }
-        } 
+        }
+
+        // Метод определяет индекс слова если выбрано условие "Слова вразброс"
+        private int RandomIndex(int max)
+        {
+            Random rnd = new Random();
+            int value = rnd.Next(0, max - 1);
+
+            if (IndexOfWords.Count == 0)
+            {
+                IndexOfWords.Add(value);
+                return value;
+            }
+
+            else
+            {
+                while (true)
+                {
+                    rnd = new Random();
+                    value = rnd.Next(0, max - 1);
+                    if (IndexOfWords.IndexOf(value) != -1)
+                    {
+                        IndexOfWords.Add(value);
+                        return value;
+                    }
+                }
+            }
+        }
+
+        private void WWW_Click(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            int value = rnd.Next(0, allWordsCount - 1);
+            www.Text += value.ToString() + " ";
+            //www.Text += RandomIndex(allWordsCount).ToString() + " ";
+        }
     }
 }
