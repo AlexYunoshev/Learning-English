@@ -263,7 +263,7 @@ namespace Learning_English
             }
         }
 
-        // кнопка Ответить //////////////////////////////////////////////////////////////
+        // кнопка Ответить
         private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
         {
             if (ButtonNextQuestion.IsEnabled == false && ProgressBar.Value != ProgressBar.Maximum)
