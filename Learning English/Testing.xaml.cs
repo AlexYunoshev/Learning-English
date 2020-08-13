@@ -205,8 +205,6 @@ namespace Learning_English
                     TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
                 }
 
-                //www.Text += wordIndex.ToString() + " ";
-
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
             }
@@ -269,7 +267,6 @@ namespace Learning_English
                 TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
 
             IsTheLastQuestion();
-            //www.Text += wordIndex.ToString() + " ";
         }
 
         /* 
