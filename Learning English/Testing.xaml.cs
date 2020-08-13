@@ -41,7 +41,7 @@ namespace Learning_English
         private List<Word> EnglishDataFiltered = new List<Word>(); // коллекция отфильтрованного словаря
 
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
-        private List<int> IndexOfWords = new List<int>(); // коллекция использованных индексов слов (если включены слова вразброс)
+       
 
         private FileIOService fileIOService;
 
@@ -320,40 +320,7 @@ namespace Learning_English
 
         private void WWW_Click(object sender, RoutedEventArgs e)
         {
-
-            int value = RandomIndex.GetRandomIndex(allWordsCount);
-            bool next = false;
-
-            if (IndexOfWords.Count == 0)
-            {
-                IndexOfWords.Add(value);
-                www.Text += value.ToString() + " ";
-            }
-            else
-            {
-                while (next == false)
-                {
-                    if (IndexOfWords.IndexOf(value) == -1)
-                    {
-                        IndexOfWords.Add(value);
-                        www.Text += value.ToString()+ " ";
-                        next = true;
-                    }
-                    else
-                    {
-                        value = RandomIndex.GetRandomIndex(allWordsCount);
-                    }
-                }
-
-                
-            }
-
-
-            //Random rnd = new Random();
-
-            //int value = rnd.Next(0, allWordsCount - 1);
-            //www.Text += value.ToString() + " ";
-            //www.Text += RandomIndex.GetRandomIndex(allWordsCount).ToString() + " ";
+            www.Text += RandomIndex.GetIndex(allWordsCount).ToString() + " ";
         }
     }
 }
