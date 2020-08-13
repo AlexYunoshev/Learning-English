@@ -47,9 +47,8 @@ namespace Learning_English.Services
                         value = RandomIndex.GetRandomValue(max);
                     }
                 }
-                return -1;
+                throw new IndexOutOfRangeException();
             }
-
         }
     }
 }

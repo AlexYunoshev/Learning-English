@@ -176,7 +176,10 @@ namespace Learning_English
                 SliderTimerMinutes.IsEnabled = false;
                 TextBoxTimerMinutes.IsEnabled = false;
                 ButtonNextQuestion.IsEnabled = false;
-              
+
+                
+
+
                 if (unit != 0)
                 {
                     foreach (Word n in EnglishData)
@@ -186,13 +189,23 @@ namespace Learning_English
 
                     allWordsCount = EnglishDataFiltered.Count;
 
+                    if (wordsByChance == true)
+                    {
+                        wordIndex = RandomIndex.GetIndex(allWordsCount);
+                    }
                     TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
                 }
                 else
                 {
+                    if (wordsByChance == true)
+                    {
+                        wordIndex = RandomIndex.GetIndex(allWordsCount);
+                    }
                     TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
                 }
-                    
+
+                //www.Text += wordIndex.ToString() + " ";
+
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
             }
@@ -241,6 +254,12 @@ namespace Learning_English
             ButtonNextQuestion.IsEnabled = false;
             ButtonGetAnswer.IsEnabled = true;
             wordIndex++;
+
+            if (wordsByChance == true)
+            {
+                wordIndex = RandomIndex.GetIndex(allWordsCount);
+            }
+
             if (unit != 0)
             {
                 TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
@@ -249,6 +268,7 @@ namespace Learning_English
                 TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
 
             IsTheLastQuestion();
+            //www.Text += wordIndex.ToString() + " ";
         }
 
         /* 
@@ -316,11 +336,5 @@ namespace Learning_English
             }
         }
 
-        
-
-        private void WWW_Click(object sender, RoutedEventArgs e)
-        {
-            www.Text += RandomIndex.GetIndex(allWordsCount).ToString() + " ";
-        }
     }
 }
