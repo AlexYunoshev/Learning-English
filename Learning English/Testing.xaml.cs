@@ -47,6 +47,8 @@ namespace Learning_English
 
         private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json"; // путь файла "статистика"
 
+        Random r = new Random();
+
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
             InitializeComponent();
@@ -314,39 +316,44 @@ namespace Learning_English
             }
         }
 
-        // Метод определяет индекс слова если выбрано условие "Слова вразброс"
-        private int RandomIndex(int max)
+        
+
+        private void WWW_Click(object sender, RoutedEventArgs e)
         {
-            Random rnd = new Random();
-            int value = rnd.Next(0, max - 1);
+
+            int value = RandomIndex.GetRandomIndex(allWordsCount);
+            bool next = false;
 
             if (IndexOfWords.Count == 0)
             {
                 IndexOfWords.Add(value);
-                return value;
+                www.Text += value.ToString() + " ";
             }
-
             else
             {
-                while (true)
+                while (next == false)
                 {
-                    rnd = new Random();
-                    value = rnd.Next(0, max - 1);
-                    if (IndexOfWords.IndexOf(value) != -1)
+                    if (IndexOfWords.IndexOf(value) == -1)
                     {
                         IndexOfWords.Add(value);
-                        return value;
+                        www.Text += value.ToString()+ " ";
+                        next = true;
+                    }
+                    else
+                    {
+                        value = RandomIndex.GetRandomIndex(allWordsCount);
                     }
                 }
-            }
-        }
 
-        private void WWW_Click(object sender, RoutedEventArgs e)
-        {
-            Random rnd = new Random();
-            int value = rnd.Next(0, allWordsCount - 1);
-            www.Text += value.ToString() + " ";
-            //www.Text += RandomIndex(allWordsCount).ToString() + " ";
+                
+            }
+
+
+            //Random rnd = new Random();
+
+            //int value = rnd.Next(0, allWordsCount - 1);
+            //www.Text += value.ToString() + " ";
+            //www.Text += RandomIndex.GetRandomIndex(allWordsCount).ToString() + " ";
         }
     }
 }

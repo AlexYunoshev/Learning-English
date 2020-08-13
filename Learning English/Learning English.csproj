@@ -61,6 +61,7 @@
     <Compile Include="Classes\StatisticData.cs" />
     <Compile Include="Services\FileIOService.cs" />
     <Compile Include="Classes\Word.cs" />
+    <Compile Include="Services\RandomIndex.cs" />
     <Compile Include="Statistic.xaml.cs">
       <DependentUpon>Statistic.xaml</DependentUpon>
     </Compile>
