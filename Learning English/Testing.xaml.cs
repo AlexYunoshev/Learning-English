@@ -85,6 +85,7 @@ namespace Learning_English
                 System.Windows.MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?\nРезультаты тестирования не сохранятся!", "ВНИМАНИЕ", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
+                    RandomIndex.Reset();
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                 }
@@ -114,7 +115,7 @@ namespace Learning_English
                     MessageBox.Show(ex.Message);
                     Close();
                 }
-
+                RandomIndex.Reset();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
             }

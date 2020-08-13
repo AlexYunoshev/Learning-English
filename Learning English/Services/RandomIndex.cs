@@ -50,5 +50,11 @@ namespace Learning_English.Services
                 throw new IndexOutOfRangeException();
             }
         }
+
+        public static void Reset()
+        {
+            IndexOfWords.Clear();
+            counter = 0;
+        }
     }
 }

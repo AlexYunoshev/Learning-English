@@ -25,7 +25,7 @@
         <Button x:Name="ButtonNextQuestion" Content="Далее" HorizontalAlignment="Left" Margin="154,160,0,0" VerticalAlignment="Top" Width="138" Height="42" Click="ButtonNextQuestion_Click"/>
         <Button x:Name="ButtonGetAnswer" Content="Ответить" HorizontalAlignment="Left" Margin="5,160,0,0" VerticalAlignment="Top" Width="138" Height="42" Click="ButtonGetAnswer_Click"/>
         <TextBlock x:Name="TextBlockCorrectAnswer" HorizontalAlignment="Left" Margin="5,138,0,0" TextWrapping="Wrap" Text="Correct answer: " VerticalAlignment="Top" Width="287" TextAlignment="Center"/>
-        <Button x:Name="WWW" Content="Button" HorizontalAlignment="Left" Margin="373,45,0,0" VerticalAlignment="Top" Width="75" Click="WWW_Click"/>
+        <Button x:Name="WWW" Content="Button" HorizontalAlignment="Left" Margin="373,45,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="www" HorizontalAlignment="Left" Height="23" Margin="378,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
