@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English" xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded">
+        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <StackPanel DockPanel.Dock="Right" Margin="10">
             <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
-            <Button x:Name="Button_Edit" Content="Редактировать словарь" Click="Button_Edit_Click"/>
             <Button x:Name="Button_Statistic" Content="Статистика" Click="Button_Statistic_Click"/>
             <StackPanel Orientation="Horizontal">
                 <ComboBox  Width="135" SelectedIndex="0" x:Name="ComboBoxUnits">

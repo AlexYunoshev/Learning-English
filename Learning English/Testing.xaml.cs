@@ -29,12 +29,14 @@ namespace Learning_English
         private bool exit = false; // выход из окна
         private bool wordsByChance = false; // слова вразброс ДА или НЕТ (по умолчанию нет)
 
-        private int time = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
+        private int time_i = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
         private int allWordsCount; // количество всех вопросов (всех слов)
         private int nowWordNumber = 1; // текущий вопрос (текущее слово)
         private int unit = 0; // 0 = All текущий юнит
         private int wordIndex = 0; // индекс слова в коллекции
         private int correctAnswerCount = 0; // количество правильных ответов = 0
+
+        private TimeSpan time;
 
         private BindingList<Word> EnglishData; // коллекция словаря
 
@@ -123,8 +125,8 @@ namespace Learning_English
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            time = Convert.ToInt32(SliderTimerMinutes.Value);
-            TextBoxTimerMinutes.Text = time.ToString() + " minutes";
+            time_i = Convert.ToInt32(SliderTimerMinutes.Value);
+            TextBoxTimerMinutes.Text = time_i.ToString() + " minutes";
         }
 
         private void CheckBoxTimerMinutes_Click(object sender, RoutedEventArgs e)
@@ -133,10 +135,15 @@ namespace Learning_English
             {
                 SliderTimerMinutes.IsEnabled = true;
                 TextBoxTimerMinutes.IsEnabled = true;
+                time_i = Convert.ToInt32(SliderTimerMinutes.Value);
+                //time = new TimeSpan();
+                //time.add(time_i);
+                
+
             }
             else
             {
-                time = 0;
+                time_i = 0;
 
                 SliderTimerMinutes.Value = 0;
                 SliderTimerMinutes.IsEnabled = false;
@@ -207,6 +214,15 @@ namespace Learning_English
 
                 TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
                 ProgressBar.Maximum = allWordsCount;
+
+              
+                //System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                //dispatcherTimer.Tick += dispatcherTimer_Tick;
+                //dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                //dispatcherTimer.Start();
+
+
+               
             }
 
             if (testingFinal == true)
@@ -217,6 +233,12 @@ namespace Learning_English
 
             IsTheLastQuestion();
         }
+
+        /*private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            TextBoxTimerMinutes.Text = time.ToString();
+            //time.AddSeconds(-1);
+        }*/
 
         private void UpdateComboBox()
         {
@@ -334,5 +356,6 @@ namespace Learning_English
             }
         }
 
+     
     }
 }

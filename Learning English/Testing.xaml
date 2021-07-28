@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English"
         mc:Ignorable="d"
-        Title="Testing" Height="295" Width="313" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Testing" Height="295" Width="313" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="82" Margin="5,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="287"/>
 

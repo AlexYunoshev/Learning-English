@@ -96,10 +96,7 @@ namespace Learning_English
             this.Close();
         }
 
-        private void Button_Edit_Click(object sender, RoutedEventArgs e)
-        {
-            dgEnglish.Visibility = Visibility.Visible; 
-        }
+
 
         private void Button_Statistic_Click(object sender, RoutedEventArgs e)
         {
