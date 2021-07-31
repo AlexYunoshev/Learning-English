@@ -62,8 +62,21 @@ namespace Learning_English
 
             UpdateComboBox(); // обновить элементы комбобокс (юниты) //
 
+
             dgEnglish.ItemsSource = EnglishData; // таблица словника берет информацию из биндинг листа "англ данные"
             EnglishData.ListChanged += English_Data_ListChanged;
+            /////////////////////////
+            dgEnglish.CanUserSortColumns = true;
+
+            
+            ICollectionView cvTasks = CollectionViewSource.GetDefaultView(dgEnglish.ItemsSource);
+            cvTasks.SortDescriptions.Add(new SortDescription("Unit", ListSortDirection.Ascending));
+            if (cvTasks != null && cvTasks.CanSort == true)
+            {
+                cvTasks.SortDescriptions.Clear();
+                cvTasks.SortDescriptions.Add(new SortDescription("Unit", ListSortDirection.Ascending));
+   
+            }
         }
 
       
@@ -177,6 +190,16 @@ namespace Learning_English
                 MessageBox.Show(ex.Message);
                 Close();
             }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //MessageBox.Show("asdas");
+            try
+            {
+                fileIOService.SaveDataWords(EnglishData); // сохранение таблицы слов //
+            }
+            catch {}
         }
     }
 }

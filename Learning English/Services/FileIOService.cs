@@ -45,6 +45,7 @@ namespace Learning_English.Services
             using (var reader = File.OpenText(pathWords))
             {
                 var fileText = reader.ReadToEnd();
+                if (fileText.Length < 10) return new BindingList<Word>();
                 return JsonConvert.DeserializeObject<BindingList<Word>>(fileText);
             }
         }

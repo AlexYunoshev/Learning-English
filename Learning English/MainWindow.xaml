@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Learning_English" xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:local="clr-namespace:Learning_English" 
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing" >
+    <Window.Resources>
+        <CollectionViewSource x:Key="dgEnglish" Source="{Binding dgEnglish}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Unit"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+
     <DockPanel>
+        
         <StackPanel DockPanel.Dock="Right" Margin="10">
             <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
             <Button x:Name="Button_Statistic" Content="Статистика" Click="Button_Statistic_Click"/>
@@ -16,32 +27,19 @@
                 </ComboBox>
                 <Button x:Name="Button_ChooseUnit" Content="Выбрать" Click="Button_ChooseUnit_Click"/>
             </StackPanel>
-            
-
         </StackPanel>
+        
         <Grid DockPanel.Dock="Left">
-            
             <DataGrid x:Name="dgEnglish" FontSize="14" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" >
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Binding="{Binding Path= WordQuizState}" IsReadOnly="False" Header=""/>
-
-
-           
                     <DataGridTextColumn Binding="{Binding Path= Unit}" IsReadOnly="False" Header="Unit"/>
                     <DataGridTextColumn Binding="{Binding Path= PartOfUnit}" IsReadOnly="False" Header="Part"/>
                     <DataGridTextColumn Binding="{Binding Path= EnglishWord}"  IsReadOnly="False" Header="English"/>
                     <DataGridTextColumn Binding="{Binding Path= TranslateWord}" IsReadOnly="False" Header="Translation" Width="*"/>
-
-                </DataGrid.Columns> 
+                </DataGrid.Columns>
             </DataGrid>
-            
         </Grid>
-
-
-
-
-
-
-
+        
     </DockPanel>
 </Window>
