@@ -27,10 +27,8 @@ namespace Learning_English
     public partial class MainWindow : Window
     {
         private readonly string pathWords = $"{Environment.CurrentDirectory}\\WordsList.json";
-        //private readonly string pathUnits = $"{Environment.CurrentDirectory}\\UnitsList.json";
         private readonly string pathStatistics = $"{Environment.CurrentDirectory}\\StatisticsList.json";
-        private readonly string pathPartsOfUnit = $"{Environment.CurrentDirectory}\\PartsOfUnitList.json";
-        private readonly string pathWordsQuizState = $"{Environment.CurrentDirectory}\\WordsQuizStateList.json";
+ 
 
 
         private BindingList<Word> EnglishData;
@@ -42,7 +40,7 @@ namespace Learning_English
         public MainWindow()
         {
             InitializeComponent();
-            fileIOService = new FileIOService(pathWords, pathStatistics, pathPartsOfUnit, pathWordsQuizState);
+            fileIOService = new FileIOService(pathWords, pathStatistics);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -53,7 +51,6 @@ namespace Learning_English
             try
             {
                 EnglishData = fileIOService.LoadDataWords();
-                //UnitsData = fileIOService.LoadDataUnits();
                 UnitsData = EnglishData.Select(x => x.Unit).Distinct().Select(Int32.Parse).ToList(); 
                 List<int> statisticData = fileIOService.LoadStatisticData();
                 StatisticData.AllWordsCount = statisticData[0];
@@ -67,36 +64,13 @@ namespace Learning_English
 
             UpdateComboBox(); // обновить элементы комбобокс (юниты) //
 
-            var result = EnglishData.Select(x => x.Unit).Distinct();
-            string res = "";
-            foreach (var a in result)
-            {
-                res += a.ToString() + "; ";
-            }
-            //MessageBox.Show(result.);
-           // MessageBox.Show(res);
-
-            //foreach (var a in EnglishData)
-            //{
-            //    IEnumerable<int> uList  = EnglishData.Distinct();
-            //}
+           
             
            
 
             dgEnglish.ItemsSource = EnglishData; // таблица словника берет информацию из биндинг листа "англ данные"
             EnglishData.ListChanged += English_Data_ListChanged;
-            /////////////////////////
-            dgEnglish.CanUserSortColumns = true;
-
-            
-            /*ICollectionView cvTasks = CollectionViewSource.GetDefaultView(dgEnglish.ItemsSource);
-            cvTasks.SortDescriptions.Add(new SortDescription("Unit", ListSortDirection.Ascending));
-            if (cvTasks != null && cvTasks.CanSort == true)
-            {
-                cvTasks.SortDescriptions.Clear();
-                cvTasks.SortDescriptions.Add(new SortDescription("Unit", ListSortDirection.Ascending));
-   
-            }*/
+            //dgEnglish.CanUserSortColumns = true;
         }
 
       
@@ -152,24 +126,6 @@ namespace Learning_English
                 dgEnglish.ItemsSource = from k in EnglishData where Convert.ToInt32(k.Unit) == index select k;
         }
 
-        private void Button_ChooseUnit_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateDG();
-        }
-
-        //private void Button_Save_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        fileIOService.SaveDataUnits(UnitsData);
-        //        MessageBox.Show("Save");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //        Close();
-        //    }
-        //}
 
 
         private void UpdateComboBox()
@@ -200,16 +156,6 @@ namespace Learning_English
                 }
                 a++;
             }
-
-            //try
-            //{
-            //    fileIOService.SaveDataUnits(UnitsData);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    Close();
-            //}
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -220,6 +166,13 @@ namespace Learning_English
                 fileIOService.SaveDataWords(EnglishData); // сохранение таблицы слов //
             }
             catch {}
+        }
+
+      
+
+        private void ComboBoxUnits_DropDownClosed(object sender, EventArgs e)
+        {
+            UpdateDG();
         }
     }
 }

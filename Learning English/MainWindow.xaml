@@ -8,13 +8,7 @@
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing" >
-    <Window.Resources>
-        <CollectionViewSource x:Key="dgEnglish" Source="{Binding dgEnglish}">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Unit"/>
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-    </Window.Resources>
+
 
     <DockPanel>
         
@@ -22,10 +16,10 @@
             <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
             <Button x:Name="Button_Statistic" Content="Статистика" Click="Button_Statistic_Click"/>
             <StackPanel Orientation="Horizontal">
-                <ComboBox  Width="135" SelectedIndex="0" x:Name="ComboBoxUnits">
+                <ComboBox  Width="135" SelectedIndex="0" x:Name="ComboBoxUnits" DropDownClosed="ComboBoxUnits_DropDownClosed" >
                     <ComboBoxItem Content="All"/>
                 </ComboBox>
-                <Button x:Name="Button_ChooseUnit" Content="Выбрать" Click="Button_ChooseUnit_Click"/>
+                
             </StackPanel>
         </StackPanel>
         
