@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Learning_English
 {
     /// <summary>
@@ -26,8 +27,10 @@ namespace Learning_English
     public partial class MainWindow : Window
     {
         private readonly string pathWords = $"{Environment.CurrentDirectory}\\WordsList.json";
-        private readonly string pathUnits = $"{Environment.CurrentDirectory}\\UnitList.json";
-        private readonly string pathStatistic = $"{Environment.CurrentDirectory}\\StatisticList.json";
+        private readonly string pathUnits = $"{Environment.CurrentDirectory}\\UnitsList.json";
+        private readonly string pathStatistics = $"{Environment.CurrentDirectory}\\StatisticsList.json";
+        private readonly string pathPartsOfUnit = $"{Environment.CurrentDirectory}\\PartsOfUnitList.json";
+        private readonly string pathWordsQuizState = $"{Environment.CurrentDirectory}\\WordsQuizStateList.json";
         private BindingList<Word> EnglishData;
         private List<int> UnitsData = new List<int>();
         private FileIOService fileIOService;
@@ -37,7 +40,7 @@ namespace Learning_English
         public MainWindow()
         {
             InitializeComponent();
-            fileIOService = new FileIOService(pathWords, pathUnits, pathStatistic);
+            fileIOService = new FileIOService(pathWords, pathUnits, pathStatistics, pathPartsOfUnit, pathWordsQuizState);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

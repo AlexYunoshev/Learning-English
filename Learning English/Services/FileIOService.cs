@@ -16,12 +16,16 @@ namespace Learning_English.Services
         private readonly string pathWords; // путь к файлу со словами
         private readonly string pathUnits; // путь к файлу с юнитами
         private readonly string pathStatistic; // путь к файлу статистики
+        private readonly string pathPartsOfUnit; // путь к файлу с частями юнита
+        private readonly string pathWordsQuizState; // путь к файлу с состоянием слов для проверки
 
-        public FileIOService(string pathWords, string pathUnits, string pathStatistic)
+        public FileIOService(string pathWords, string pathUnits, string pathStatistic, string pathPartsOfUnit, string pathWordsQuizState)
         {
             this.pathWords = pathWords;
             this.pathUnits = pathUnits;
             this.pathStatistic = pathStatistic;
+            this.pathPartsOfUnit = pathPartsOfUnit;
+            this.pathWordsQuizState = pathWordsQuizState;
         }
 
         public FileIOService(string pathStatistic)

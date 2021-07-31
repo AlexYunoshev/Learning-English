@@ -12,7 +12,9 @@ namespace Learning_English.Words
         private string englishWord;
         private string translateWord;
         private string unit;
-       
+        private int partOfUnit;
+        private bool wordQuizState;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName = "")
@@ -53,6 +55,30 @@ namespace Learning_English.Words
                     return;
                 unit = value;
                 OnPropertyChanged("Unit");
+            }
+        }
+
+        public int PartOfUnit
+        {
+            get { return partOfUnit; }
+            set
+            {
+                if (partOfUnit == value)
+                    return;
+                partOfUnit = value;
+                OnPropertyChanged("PartOfUnit");
+            }
+        }
+
+        public bool WordQuizState
+        {
+            get { return wordQuizState; }
+            set
+            {
+                if (wordQuizState == value)
+                    return;
+                wordQuizState = value;
+                OnPropertyChanged("WordQuizState");
             }
         }
     }
