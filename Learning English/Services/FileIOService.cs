@@ -14,15 +14,15 @@ namespace Learning_English.Services
     class FileIOService
     {
         private readonly string pathWords; // путь к файлу со словами
-        private readonly string pathUnits; // путь к файлу с юнитами
+        //private readonly string pathUnits; // путь к файлу с юнитами
         private readonly string pathStatistic; // путь к файлу статистики
         private readonly string pathPartsOfUnit; // путь к файлу с частями юнита
         private readonly string pathWordsQuizState; // путь к файлу с состоянием слов для проверки
 
-        public FileIOService(string pathWords, string pathUnits, string pathStatistic, string pathPartsOfUnit, string pathWordsQuizState)
+        public FileIOService(string pathWords, string pathStatistic, string pathPartsOfUnit, string pathWordsQuizState)
         {
             this.pathWords = pathWords;
-            this.pathUnits = pathUnits;
+         
             this.pathStatistic = pathStatistic;
             this.pathPartsOfUnit = pathPartsOfUnit;
             this.pathWordsQuizState = pathWordsQuizState;
@@ -61,30 +61,30 @@ namespace Learning_English.Services
         }
 
         // Метод загрузки юнитов
-        public List<int> LoadDataUnits()
-        {
-            var fileExists = File.Exists(pathUnits);
-            if (!fileExists)
-            {
-                File.CreateText(pathUnits).Dispose();
-                return new List<int>();
-            }
-            using (var reader = File.OpenText(pathUnits))
-            {
-                var fileText = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<int>>(fileText);
-            }
-        }
+        //public List<int> LoadDataUnits()
+        //{
+        //    var fileExists = File.Exists(pathUnits);
+        //    if (!fileExists)
+        //    {
+        //        File.CreateText(pathUnits).Dispose();
+        //        return new List<int>();
+        //    }
+        //    using (var reader = File.OpenText(pathUnits))
+        //    {
+        //        var fileText = reader.ReadToEnd();
+        //        return JsonConvert.DeserializeObject<List<int>>(fileText);
+        //    }
+        //}
 
         // Метод сохранения юнитов
-        public void SaveDataUnits(object UnitsData)
-        {
-            using (StreamWriter writer = File.CreateText(pathUnits))
-            {
-                string output = JsonConvert.SerializeObject(UnitsData);
-                writer.Write(output);
-            }
-        }
+        //public void SaveDataUnits(object UnitsData)
+        //{
+        //    using (StreamWriter writer = File.CreateText(pathUnits))
+        //    {
+        //        string output = JsonConvert.SerializeObject(UnitsData);
+        //        writer.Write(output);
+        //    }
+        //}
 
         // Метод загрузки статистики
         public List<int> LoadStatisticData()
