@@ -11,9 +11,9 @@ namespace Learning_English.Words
     {
         private string englishWord;
         private string translateWord;
-        private string unit;
+        private int unit;
         private int partOfUnit;
-        private bool wordQuizState;
+        private bool wordQuizState = true;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,7 +46,7 @@ namespace Learning_English.Words
             }
         }
 
-        public string Unit
+        public int Unit
         {
             get { return unit; }
             set

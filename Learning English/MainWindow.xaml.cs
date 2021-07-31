@@ -28,14 +28,9 @@ namespace Learning_English
     {
         private readonly string pathWords = $"{Environment.CurrentDirectory}\\WordsList.json";
         private readonly string pathStatistics = $"{Environment.CurrentDirectory}\\StatisticsList.json";
- 
-
-
         private BindingList<Word> EnglishData;
         private List<int> UnitsData = new List<int>();
         private FileIOService fileIOService;
-
-        
 
         public MainWindow()
         {
@@ -45,13 +40,10 @@ namespace Learning_English
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-          
-
-            // начальная загрузка всех данных (обновление) //
             try
             {
                 EnglishData = fileIOService.LoadDataWords();
-                UnitsData = EnglishData.Select(x => x.Unit).Distinct().Select(Int32.Parse).ToList(); 
+                UnitsData = EnglishData.Select(x => x.Unit).Distinct().ToList(); 
                 List<int> statisticData = fileIOService.LoadStatisticData();
                 StatisticData.AllWordsCount = statisticData[0];
                 StatisticData.CorrectWordsCount = statisticData[1];
@@ -63,17 +55,10 @@ namespace Learning_English
             }
 
             UpdateComboBox(); // обновить элементы комбобокс (юниты) //
-
-           
-            
-           
-
             dgEnglish.ItemsSource = EnglishData; // таблица словника берет информацию из биндинг листа "англ данные"
             EnglishData.ListChanged += English_Data_ListChanged;
             //dgEnglish.CanUserSortColumns = true;
         }
-
-      
 
         private void English_Data_ListChanged(object sender, ListChangedEventArgs e)
         {
@@ -96,21 +81,15 @@ namespace Learning_English
             UpdateComboBox();
         }
 
-       
-
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
-            dgEnglish.Visibility = Visibility.Hidden;
             Testing testing = new Testing(EnglishData, UnitsData);
             testing.Show();
             this.Close();
         }
 
-
-
         private void Button_Statistic_Click(object sender, RoutedEventArgs e)
         {
-            dgEnglish.Visibility = Visibility.Hidden;
             Statistic statistic = new Statistic();
             statistic.Show();
             this.Close();
@@ -126,8 +105,6 @@ namespace Learning_English
                 dgEnglish.ItemsSource = from k in EnglishData where Convert.ToInt32(k.Unit) == index select k;
         }
 
-
-
         private void UpdateComboBox()
         {
             UnitsData.Sort();
@@ -141,7 +118,6 @@ namespace Learning_English
             }
             ComboBoxUnits.SelectedIndex = 0;
         }
-
 
         private void UpdateUnitsData()
         {
@@ -160,15 +136,12 @@ namespace Learning_English
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //MessageBox.Show("asdas");
             try
             {
                 fileIOService.SaveDataWords(EnglishData); // сохранение таблицы слов //
             }
             catch {}
         }
-
-      
 
         private void ComboBoxUnits_DropDownClosed(object sender, EventArgs e)
         {

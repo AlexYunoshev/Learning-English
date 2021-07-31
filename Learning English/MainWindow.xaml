@@ -7,33 +7,35 @@
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="Learning English v1.01" Height="450" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing" >
+        Title="Learning English v1.01" Height="800" Width="800" Icon="GB.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Closing="Window_Closing" ResizeMode="NoResize" >
 
 
     <DockPanel>
-        
-        <StackPanel DockPanel.Dock="Right" Margin="10">
-            <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
-            <Button x:Name="Button_Statistic" Content="Статистика" Click="Button_Statistic_Click"/>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox  Width="135" SelectedIndex="0" x:Name="ComboBoxUnits" DropDownClosed="ComboBoxUnits_DropDownClosed" >
-                    <ComboBoxItem Content="All"/>
-                </ComboBox>
-                
-            </StackPanel>
-        </StackPanel>
-        
-        <Grid DockPanel.Dock="Left">
-            <DataGrid x:Name="dgEnglish" FontSize="14" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" >
+
+
+
+        <Grid>
+            <DataGrid x:Name="dgEnglish" FontSize="14" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" Width="590">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Binding="{Binding Path= WordQuizState}" IsReadOnly="False" Header=""/>
                     <DataGridTextColumn Binding="{Binding Path= Unit}" IsReadOnly="False" Header="Unit"/>
                     <DataGridTextColumn Binding="{Binding Path= PartOfUnit}" IsReadOnly="False" Header="Part"/>
-                    <DataGridTextColumn Binding="{Binding Path= EnglishWord}"  IsReadOnly="False" Header="English"/>
+                    <DataGridTextColumn Binding="{Binding Path= EnglishWord}"  IsReadOnly="False" Header="English" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Path= TranslateWord}" IsReadOnly="False" Header="Translation" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
+
+        <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10" Width="150">
+            <Button x:Name="Button_Start" Content="Начать проверку слов" Click="Button_Start_Click"/>
+            <Button x:Name="Button_Statistic" Content="Статистика" Click="Button_Statistic_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox  Width="150" SelectedIndex="0" x:Name="ComboBoxUnits" DropDownClosed="ComboBoxUnits_DropDownClosed" >
+                    <ComboBoxItem Content="All"/>
+                </ComboBox>
+
+            </StackPanel>
+        </StackPanel>
+
     </DockPanel>
 </Window>
