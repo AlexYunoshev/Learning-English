@@ -355,7 +355,5 @@ namespace Learning_English
                 TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].EnglishWord;
             }
         }
-
-     
     }
 }
