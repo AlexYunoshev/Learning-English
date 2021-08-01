@@ -37,12 +37,16 @@
         <TextBlock x:Name="TextBlockCorrectAnswer" Text="Correct answer: " TextAlignment="Center" Margin="5,3"/>
         <Button x:Name="ButtonStartEndTesting" Content="Начать тест" Click="ButtonStartEndTesting_Click" Height="42" Margin="5,3"/>
 
-        <StackPanel Orientation="Horizontal" Margin="5,3">
-            <Button x:Name="ButtonNextQuestion" Content="Далее" Height="42" Click="ButtonNextQuestion_Click" Width="157" Margin="0, 0, 5, 0"/>
-            <Button x:Name="ButtonGetAnswer" Content="Ответить" Height="42" Click="ButtonGetAnswer_Click" Width="157" Margin="5, 0, 0, 0"/>
-        </StackPanel>
+        <Grid Margin="5,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonNextQuestion" Content="Далее" Height="42" Click="ButtonNextQuestion_Click" Grid.Column="0" Margin="0, 0, 5, 0"/>
+            <Button x:Name="ButtonGetAnswer" Content="Ответить" Height="42" Click="ButtonGetAnswer_Click"  Grid.Column="1" Margin="5, 0, 0, 0" />
+        </Grid>
 
-        <TextBlock x:Name="TextBlockAllWordsCount" Text="1/" TextAlignment="Center" Margin="5,3"/>
+        <TextBlock x:Name="TextBlockAllWordsCount" Text="0/" TextAlignment="Center" Margin="5,3"/>
         <ProgressBar x:Name="ProgressBar" Height="25" IsEnabled="false" Margin="5,3"/>
     </StackPanel>
 </Window>

@@ -24,14 +24,14 @@ namespace Learning_English
     /// </summary>
     public partial class Testing : Window
     {
-        private bool testingStart = false; // начало тестирования
-        private bool testingFinal = false; // в тесте пройдены все слова
+        private bool testingIsStart = false; // начало тестирования
+        private bool testingIsEnd = false; // в тесте пройдены все слова
         private bool exit = false; // выход из окна
         private bool wordsByChance = false; // слова вразброс ДА или НЕТ (по умолчанию нет)
 
         private int time_i = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
         private int allWordsCount; // количество всех вопросов (всех слов)
-        private int nowWordNumber = 1; // текущий вопрос (текущее слово)
+        private int nowWordNumber = 0; // текущий вопрос (текущее слово)
         private int unit = 0; // 0 = All текущий юнит
         private int wordIndex = 0; // индекс слова в коллекции
         private int correctAnswerCount = 0; // количество правильных ответов = 0
@@ -62,22 +62,81 @@ namespace Learning_English
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.Height = 245;
-
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = allWordsCount;
-            ProgressBar.Value = 1;
-            //ProgressBar.Visibility = Visibility.Hidden;
-
+            ProgressBar.Value = 0;
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-            //TextBlockAllWordsCount.Visibility = Visibility.Hidden;
+        }
 
-            //TextBoxAnswer.IsReadOnly = true;
+        private void ButtonStartEndTesting_Click(object sender, RoutedEventArgs e)
+        {
+            if (testingIsStart == false)
+            {
+                testingIsStart = true;
 
-            //ButtonGetAnswer.Visibility = Visibility.Hidden;
+                unit = ComboBoxUnitsTesting.SelectedIndex;
+                wordsByChance = (bool)CheckBoxWordsByChance.IsChecked;
 
-            //ButtonNextQuestion.Visibility = Visibility.Hidden;
-            //ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
+                TextBoxAnswer.IsReadOnly = false;
+                TextBoxAnswer.Text = "";
+
+                //TextBlockAllWordsCount.Visibility = Visibility.Visible;
+
+                //ButtonStartEndTesting.Visibility = Visibility.Hidden;
+                ButtonStartEndTesting.Content = "Завершить тест";
+
+                //ButtonNextQuestion.Visibility = Visibility.Visible;
+
+                //ButtonGetAnswer.Visibility = Visibility.Visible;
+
+                //ProgressBar.Visibility = Visibility.Visible;
+                
+               // ComboBoxUnitsTesting.IsEnabled = false;
+                //CheckBoxWordsByChance.IsEnabled = false;
+                //CheckBoxTimerMinutes.IsEnabled = false;
+                //SliderTimerMinutes.IsEnabled = false;
+                //TextBoxTimerMinutes.IsEnabled = false;
+               // ButtonNextQuestion.IsEnabled = false;
+
+
+                if (unit != 0)
+                {
+                    foreach (Word n in EnglishData)
+                    {
+                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unit) select k).ToList();
+                    }
+
+                    allWordsCount = EnglishDataFiltered.Count;
+
+                    if (wordsByChance == true)
+                    {
+                        wordIndex = RandomIndex.GetIndex(allWordsCount);
+                    }
+                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
+                }
+                else
+                {
+                    if (wordsByChance == true)
+                    {
+                        wordIndex = RandomIndex.GetIndex(allWordsCount);
+                    }
+                    TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
+                }
+
+                TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
+                ProgressBar.Maximum = allWordsCount;
+
+
+
+            }
+
+            if (testingIsEnd == true)
+            {
+                exit = true;
+                this.Close();
+            }
+
+            IsTheLastQuestion();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -153,82 +212,7 @@ namespace Learning_English
             }
         }
 
-        private void ButtonStartEndTesting_Click(object sender, RoutedEventArgs e)
-        {
-            if (testingStart == false)
-            {
-                this.Height = 295;
-
-                testingStart = true;
-
-                unit = ComboBoxUnitsTesting.SelectedIndex;
-                wordsByChance = (bool)CheckBoxWordsByChance.IsChecked;
-
-                TextBoxAnswer.IsReadOnly = false;
-                TextBoxAnswer.Text = "";
-
-                TextBlockAllWordsCount.Visibility = Visibility.Visible;
-
-                ButtonStartEndTesting.Visibility = Visibility.Hidden;
-                ButtonStartEndTesting.Content = "Завершить тест";
-
-                ButtonNextQuestion.Visibility = Visibility.Visible;
-
-                ButtonGetAnswer.Visibility = Visibility.Visible;
-
-                ProgressBar.Visibility = Visibility.Visible;
-
-                ComboBoxUnitsTesting.IsEnabled = false;
-                CheckBoxWordsByChance.IsEnabled = false;
-                CheckBoxTimerMinutes.IsEnabled = false;
-                SliderTimerMinutes.IsEnabled = false;
-                TextBoxTimerMinutes.IsEnabled = false;
-                ButtonNextQuestion.IsEnabled = false;
-
-             
-                if (unit != 0)
-                {
-                    foreach (Word n in EnglishData)
-                    {
-                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unit) select k).ToList();
-                    }
-
-                    allWordsCount = EnglishDataFiltered.Count;
-
-                    if (wordsByChance == true)
-                    {
-                        wordIndex = RandomIndex.GetIndex(allWordsCount);
-                    }
-                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
-                }
-                else
-                {
-                    if (wordsByChance == true)
-                    {
-                        wordIndex = RandomIndex.GetIndex(allWordsCount);
-                    }
-                    TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
-                }
-
-                TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-                ProgressBar.Maximum = allWordsCount;
-
-              
-                //System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                //dispatcherTimer.Tick += dispatcherTimer_Tick;
-                //dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-                //dispatcherTimer.Start();
-               
-            }
-
-            if (testingFinal == true)
-            {
-                exit = true;
-                this.Close();
-            }
-
-            IsTheLastQuestion();
-        }
+        
 
         /*private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -314,7 +298,7 @@ namespace Learning_English
 
             if (nowWordNumber == allWordsCount)
             {
-                testingFinal = true;
+                testingIsEnd = true;
                 ButtonStartEndTesting.Visibility = Visibility.Visible;
                 ProgressBar.Visibility = Visibility.Hidden;
                 ButtonGetAnswer.IsEnabled = false;
