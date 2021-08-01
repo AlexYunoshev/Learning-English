@@ -56,10 +56,12 @@ namespace Learning_English
         public Testing(BindingList<Word> EnglishData, List<int> UnitsData)
         {
             InitializeComponent();
+           
             allWordsCount = EnglishData.Count; // количество всех слов
             this.EnglishData = EnglishData.ToList(); // коллекция слов
             this.UnitsData = UnitsData; // коллекция юнитов
-            UpdateComboBox(); 
+            UpdateComboBox();
+            SliderTimerMinutes.ValueChanged += Slider_ValueChanged;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -68,13 +70,6 @@ namespace Learning_English
             ProgressBar.Maximum = allWordsCount;
             ProgressBar.Value = 0;
             TextBlockAllWordsCount.Text = "Пройдено вопросов: " + nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-
-          
-            //DispatcherTimer timer = new DispatcherTimer();
-            //timerValue = new TimeSpan(0, 5, 0);
-            //timer.Tick += new EventHandler(timer_Tick);
-            //timer.Interval = new TimeSpan(0, 0, 1);
-            //timer.Start();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -231,10 +226,7 @@ namespace Learning_English
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //MessageBox.Show(SliderTimerMinutes.Value.ToString());
-            //SliderTimerMinutes.Value = 1;
             TextBoxTimerMinutes.Text = Convert.ToInt32(SliderTimerMinutes.Value).ToString() + " minutes";
-            //TextBoxTimerMinutes.Text = "asdas";
         }
 
         private void CheckBoxTimerMinutes_Click(object sender, RoutedEventArgs e)
