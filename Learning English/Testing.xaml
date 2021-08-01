@@ -26,7 +26,7 @@
 
                 <StackPanel Width="170" Margin="5">
                     <CheckBox x:Name="CheckBoxTimerMinutes" Content="Ограничение времени" Click="CheckBoxTimerMinutes_Click" Style="{StaticResource Menu}"/>
-                    <Slider x:Name="SliderTimerMinutes" TickPlacement="TopLeft" Height="25" Value="0" Minimum="0" Maximum="45" ValueChanged="Slider_ValueChanged" IsEnabled="False" Style="{StaticResource Menu}"/>
+                    <Slider x:Name="SliderTimerMinutes" TickPlacement="TopLeft" Height="25" Value="0" Minimum="1" Maximum="45" ValueChanged="Slider_ValueChanged" IsEnabled="False" Style="{StaticResource Menu}"/>
                     <TextBox x:Name="TextBoxTimerMinutes" Height="19" Text="1 minutes" IsReadOnly="True" IsEnabled="False" Style="{StaticResource Menu}"/>
                 </StackPanel>
             </StackPanel>

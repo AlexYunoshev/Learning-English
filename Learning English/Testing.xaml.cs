@@ -232,7 +232,7 @@ namespace Learning_English
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             //MessageBox.Show(SliderTimerMinutes.Value.ToString());
-           
+            //SliderTimerMinutes.Value = 1;
             TextBoxTimerMinutes.Text = Convert.ToInt32(SliderTimerMinutes.Value).ToString() + " minutes";
             //TextBoxTimerMinutes.Text = "asdas";
         }
