@@ -62,22 +62,22 @@ namespace Learning_English
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Height = 245;
+            //this.Height = 245;
 
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = allWordsCount;
             ProgressBar.Value = 1;
-            ProgressBar.Visibility = Visibility.Hidden;
+            //ProgressBar.Visibility = Visibility.Hidden;
 
             TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-            TextBlockAllWordsCount.Visibility = Visibility.Hidden;
+            //TextBlockAllWordsCount.Visibility = Visibility.Hidden;
 
-            TextBoxAnswer.IsReadOnly = true;
+            //TextBoxAnswer.IsReadOnly = true;
 
-            ButtonGetAnswer.Visibility = Visibility.Hidden;
+            //ButtonGetAnswer.Visibility = Visibility.Hidden;
 
-            ButtonNextQuestion.Visibility = Visibility.Hidden;
-            ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
+            //ButtonNextQuestion.Visibility = Visibility.Hidden;
+            //ButtonNextQuestion.Margin = new Thickness(154, 160, 0, 0);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -185,9 +185,7 @@ namespace Learning_English
                 TextBoxTimerMinutes.IsEnabled = false;
                 ButtonNextQuestion.IsEnabled = false;
 
-                
-
-
+             
                 if (unit != 0)
                 {
                     foreach (Word n in EnglishData)
@@ -220,8 +218,6 @@ namespace Learning_English
                 //dispatcherTimer.Tick += dispatcherTimer_Tick;
                 //dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
                 //dispatcherTimer.Start();
-
-
                
             }
 
