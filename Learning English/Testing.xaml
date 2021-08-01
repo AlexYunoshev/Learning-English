@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Learning_English"
         mc:Ignorable="d"
-        Title="Testing" Height="360" Width="340" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="Testing" Height="370" Width="340" ResizeMode="NoResize" Icon="GB.ico" Closing="Window_Closing" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style x:Key="Menu">
@@ -27,26 +27,30 @@
                 <StackPanel Width="170" Margin="5">
                     <CheckBox x:Name="CheckBoxTimerMinutes" Content="Ограничение времени" Click="CheckBoxTimerMinutes_Click" Style="{StaticResource Menu}"/>
                     <Slider x:Name="SliderTimerMinutes" TickPlacement="TopLeft" Height="25" Value="0" Minimum="0" Maximum="45" ValueChanged="Slider_ValueChanged" IsEnabled="False" Style="{StaticResource Menu}"/>
-                    <TextBox x:Name="TextBoxTimerMinutes" Height="19" Text="0 minutes" IsReadOnly="True" IsEnabled="False" Style="{StaticResource Menu}"/>
+                    <TextBox x:Name="TextBoxTimerMinutes" Height="19" Text="1 minutes" IsReadOnly="True" IsEnabled="False" Style="{StaticResource Menu}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
         <TextBlock x:Name="TextBlockQuestion" Text="Вопрос" TextAlignment="Center" Margin="5,3"/>
-        <TextBox x:Name="TextBoxAnswer" Height="20" Text="Answer" TextAlignment="Center" Margin="5,3"/>
+        <TextBox x:Name="TextBoxAnswer" Height="20" Text="Answer" TextAlignment="Center" Margin="5,3" IsEnabled="False"/>
         <TextBlock x:Name="TextBlockCorrectAnswer" Text="Correct answer: " TextAlignment="Center" Margin="5,3"/>
-        <Button x:Name="ButtonStartEndTesting" Content="Начать тест" Click="ButtonStartEndTesting_Click" Height="42" Margin="5,3"/>
+    
 
-        <Grid Margin="5,3">
+        <Grid Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="ButtonNextQuestion" Content="Далее" Height="42" Click="ButtonNextQuestion_Click" Grid.Column="0" Margin="0, 0, 5, 0"/>
-            <Button x:Name="ButtonGetAnswer" Content="Ответить" Height="42" Click="ButtonGetAnswer_Click"  Grid.Column="1" Margin="5, 0, 0, 0" />
+            <Button x:Name="ButtonNextQuestion" Content="Далее" Height="42" Click="ButtonNextQuestion_Click" Grid.Column="0" Margin="0, 0, 5, 0" IsEnabled="False"/>
+            <Button x:Name="ButtonGetAnswer" Content="Ответить" Height="42" Click="ButtonGetAnswer_Click"  Grid.Column="1" Margin="5, 0, 0, 0"  IsEnabled="False"/>
         </Grid>
 
-        <TextBlock x:Name="TextBlockAllWordsCount" Text="0/" TextAlignment="Center" Margin="5,3"/>
-        <ProgressBar x:Name="ProgressBar" Height="25" IsEnabled="false" Margin="5,3"/>
+        <TextBlock x:Name="TextBlockAllWordsCount" Text="Пройдено вопросов: 0/" TextAlignment="Center" Margin="5,3"/>
+        <ProgressBar x:Name="ProgressBar" Height="25" Margin="5,3"/>
+
+        <Button x:Name="ButtonStartEndTesting" Content="Начать тест" Click="ButtonStartEndTesting_Click" Height="42" Margin="5"/>
+        
+        
     </StackPanel>
 </Window>

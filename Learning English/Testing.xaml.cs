@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Learning_English
 {
@@ -25,22 +27,22 @@ namespace Learning_English
     public partial class Testing : Window
     {
         private bool testingIsStart = false; // начало тестирования
-        private bool testingIsEnd = false; // в тесте пройдены все слова
         private bool exit = false; // выход из окна
         private bool wordsByChance = false; // слова вразброс ДА или НЕТ (по умолчанию нет)
+        private bool timerIsEnable = false;
 
-        private int time_i = 0; // ограничение времени (по умолчанию 0, т.е. выключено)
         private int allWordsCount; // количество всех вопросов (всех слов)
         private int nowWordNumber = 0; // текущий вопрос (текущее слово)
-        private int unit = 0; // 0 = All текущий юнит
+        private int unitIndex = 0; // 0 = All текущий юнит
         private int wordIndex = 0; // индекс слова в коллекции
         private int correctAnswerCount = 0; // количество правильных ответов = 0
 
-        private TimeSpan time;
+        private TimeSpan timerValue;
+        private DispatcherTimer timer;
 
-        private BindingList<Word> EnglishData; // коллекция словаря
+        private List<Word> EnglishData; // коллекция словаря
 
-        private List<Word> EnglishDataFiltered = new List<Word>(); // коллекция отфильтрованного словаря
+ 
 
         private List<int> UnitsData = new List<int>(); // список разделов (Units)
        
@@ -55,7 +57,7 @@ namespace Learning_English
         {
             InitializeComponent();
             allWordsCount = EnglishData.Count; // количество всех слов
-            this.EnglishData = EnglishData; // коллекция слов
+            this.EnglishData = EnglishData.ToList(); // коллекция слов
             this.UnitsData = UnitsData; // коллекция юнитов
             UpdateComboBox(); 
         }
@@ -65,101 +67,23 @@ namespace Learning_English
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = allWordsCount;
             ProgressBar.Value = 0;
-            TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-        }
+            TextBlockAllWordsCount.Text = "Пройдено вопросов: " + nowWordNumber.ToString() + "/" + allWordsCount.ToString();
 
-        private void ButtonStartEndTesting_Click(object sender, RoutedEventArgs e)
-        {
-            if (testingIsStart == false)
-            {
-                testingIsStart = true;
-
-                unit = ComboBoxUnitsTesting.SelectedIndex;
-                wordsByChance = (bool)CheckBoxWordsByChance.IsChecked;
-
-                TextBoxAnswer.IsReadOnly = false;
-                TextBoxAnswer.Text = "";
-
-                //TextBlockAllWordsCount.Visibility = Visibility.Visible;
-
-                //ButtonStartEndTesting.Visibility = Visibility.Hidden;
-                ButtonStartEndTesting.Content = "Завершить тест";
-
-                //ButtonNextQuestion.Visibility = Visibility.Visible;
-
-                //ButtonGetAnswer.Visibility = Visibility.Visible;
-
-                //ProgressBar.Visibility = Visibility.Visible;
-                
-               // ComboBoxUnitsTesting.IsEnabled = false;
-                //CheckBoxWordsByChance.IsEnabled = false;
-                //CheckBoxTimerMinutes.IsEnabled = false;
-                //SliderTimerMinutes.IsEnabled = false;
-                //TextBoxTimerMinutes.IsEnabled = false;
-               // ButtonNextQuestion.IsEnabled = false;
-
-
-                if (unit != 0)
-                {
-                    foreach (Word n in EnglishData)
-                    {
-                        EnglishDataFiltered = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unit) select k).ToList();
-                    }
-
-                    allWordsCount = EnglishDataFiltered.Count;
-
-                    if (wordsByChance == true)
-                    {
-                        wordIndex = RandomIndex.GetIndex(allWordsCount);
-                    }
-                    TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
-                }
-                else
-                {
-                    if (wordsByChance == true)
-                    {
-                        wordIndex = RandomIndex.GetIndex(allWordsCount);
-                    }
-                    TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
-                }
-
-                TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-                ProgressBar.Maximum = allWordsCount;
-
-
-
-            }
-
-            if (testingIsEnd == true)
-            {
-                exit = true;
-                this.Close();
-            }
-
-            IsTheLastQuestion();
+          
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timerValue = new TimeSpan(0, 5, 0);
+            //timer.Tick += new EventHandler(timer_Tick);
+            //timer.Interval = new TimeSpan(0, 0, 1);
+            //timer.Start();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (exit == false)
-            {
-                System.Windows.MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?\nРезультаты тестирования не сохранятся!", "ВНИМАНИЕ", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    RandomIndex.Reset();
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-            }
-            else
+            if (exit == true)
             {
                 StatisticData.AllWordsCount += allWordsCount;
                 StatisticData.CorrectWordsCount += correctAnswerCount;
-                MessageBox.Show("Правильных ответов " + correctAnswerCount + "/" + allWordsCount, "Результаты");
+                MessageBox.Show("Правильных ответов: " + correctAnswerCount + "/" + allWordsCount, "Результаты");
 
                 fileIOService = new FileIOService(pathStatistic);
 
@@ -174,18 +98,143 @@ namespace Learning_English
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    Close();
                 }
                 RandomIndex.Reset();
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
             }
+            else
+            {
+                System.Windows.MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?\nРезультаты тестирования не сохранятся!", "ВНИМАНИЕ", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    RandomIndex.Reset();
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void ButtonStartEndTesting_Click(object sender, RoutedEventArgs e)
+        {
+            if (testingIsStart == true)
+            {
+                exit = IsTheLastQuestion();
+                this.Close();
+            }
+
+            else
+            {
+                if (timerIsEnable == true)
+                {
+                    timerValue = new TimeSpan(0, Convert.ToInt32(SliderTimerMinutes.Value), 0);
+                    timer = new DispatcherTimer();
+                    timer.Tick += new EventHandler(timer_Tick);
+                    timer.Interval = new TimeSpan(0, 0, 1);
+                    timer.Start();
+                }
+
+                testingIsStart = true;
+                ButtonStartEndTesting.Content = "Завершить тест";
+                unitIndex = ComboBoxUnitsTesting.SelectedIndex;
+                wordsByChance = (bool)CheckBoxWordsByChance.IsChecked;
+                TextBoxAnswer.IsEnabled = true;
+                TextBoxAnswer.Text = "";
+                ButtonGetAnswer.IsEnabled = true;
+
+                ComboBoxUnitsTesting.IsEnabled = false;
+                CheckBoxWordsByChance.IsEnabled = false;
+                CheckBoxTimerMinutes.IsEnabled = false;
+                SliderTimerMinutes.IsEnabled = false;
+                
+
+                if (unitIndex != 0)
+                {
+                    EnglishData = (from k in EnglishData where (Convert.ToInt32(k.Unit) == unitIndex) select k).ToList();
+                    allWordsCount = EnglishData.Count;
+                }
+
+                if (wordsByChance == true)
+                {
+                    wordIndex = RandomIndex.GetIndex(allWordsCount);
+                }
+                TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
+                TextBlockAllWordsCount.Text = "Пройдено вопросов: " + nowWordNumber.ToString() + "/" + allWordsCount.ToString();
+                ProgressBar.Maximum = allWordsCount;   
+            }
+        }
+
+        // кнопка Далее
+        private void ButtonNextQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxAnswer.IsReadOnly = false;
+            TextBoxAnswer.Foreground = Brushes.Black;
+            TextBlockCorrectAnswer.FontWeight = FontWeights.Normal;
+            TextBoxAnswer.Text = "";
+            TextBlockCorrectAnswer.Text = "Correct answer is: ";
+           
+            ButtonNextQuestion.IsEnabled = false;
+            ButtonGetAnswer.IsEnabled = true;
+            wordIndex++;
+
+            if (wordsByChance == true)
+            {
+                wordIndex = RandomIndex.GetIndex(allWordsCount);
+            }
+
+            TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
+        }
+
+        // кнопка Ответить
+        private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxAnswer.IsReadOnly = true;
+            ButtonGetAnswer.IsEnabled = false;
+            TextBlockCorrectAnswer.FontWeight = FontWeights.Bold;
+            nowWordNumber++;
+            ProgressBar.Value = nowWordNumber;
+            TextBlockAllWordsCount.Text = "Пройдено вопросов: " + nowWordNumber.ToString() + "/" + allWordsCount.ToString();
+
+            if (ButtonNextQuestion.IsEnabled == false && ProgressBar.Value != ProgressBar.Maximum)
+            {
+                ButtonNextQuestion.IsEnabled = true; 
+            }
+
+            if (string.Equals(EnglishData[wordIndex].EnglishWord, TextBoxAnswer.Text) == true)
+            {
+                TextBoxAnswer.Foreground = Brushes.Green;
+                correctAnswerCount++;
+            }
+            else
+            {
+                TextBoxAnswer.Foreground = Brushes.Red;
+            }
+            TextBlockCorrectAnswer.Text = "Correct answer is: " + EnglishData[wordIndex].EnglishWord;
+        }
+
+
+
+
+ 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+           
+            timerValue = timerValue - TimeSpan.FromSeconds(1);
+            //MessageBox.Show(timerValue.ToString());
+            TextBoxTimerMinutes.Text = timerValue.ToString(@"mm\:ss");
+
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            time_i = Convert.ToInt32(SliderTimerMinutes.Value);
-            TextBoxTimerMinutes.Text = time_i.ToString() + " minutes";
+            //MessageBox.Show(SliderTimerMinutes.Value.ToString());
+           
+            TextBoxTimerMinutes.Text = Convert.ToInt32(SliderTimerMinutes.Value).ToString() + " minutes";
+            //TextBoxTimerMinutes.Text = "asdas";
         }
 
         private void CheckBoxTimerMinutes_Click(object sender, RoutedEventArgs e)
@@ -194,21 +243,18 @@ namespace Learning_English
             {
                 SliderTimerMinutes.IsEnabled = true;
                 TextBoxTimerMinutes.IsEnabled = true;
-                time_i = Convert.ToInt32(SliderTimerMinutes.Value);
-                //time = new TimeSpan();
-                //time.add(time_i);
-                
+                timerIsEnable = true;
+
+
 
             }
             else
             {
-                time_i = 0;
-
-                SliderTimerMinutes.Value = 0;
+                //SliderTimerMinutes.Value = 0;
                 SliderTimerMinutes.IsEnabled = false;
-
                 TextBoxTimerMinutes.IsEnabled = false;
-                TextBoxTimerMinutes.Text = time.ToString() + " minutes";
+                TextBoxTimerMinutes.Text = Convert.ToInt32(SliderTimerMinutes.Value).ToString() + " minutes";
+                timerIsEnable = false;
             }
         }
 
@@ -242,98 +288,25 @@ namespace Learning_English
                 wordsByChance = false;
         }
 
-        private void ButtonNextQuestion_Click(object sender, RoutedEventArgs e)
-        {
-            TextBoxAnswer.IsReadOnly = false;
-            TextBoxAnswer.Foreground = Brushes.Black;
-            TextBoxAnswer.Text = "";
-            TextBlockCorrectAnswer.Text = "Correct answer: ";
-            TextBlockCorrectAnswer.FontWeight = FontWeights.Normal;
-            nowWordNumber++;
-            ProgressBar.Value = nowWordNumber;
-            TextBlockAllWordsCount.Text = nowWordNumber.ToString() + "/" + allWordsCount.ToString();
-            ButtonNextQuestion.IsEnabled = false;
-            ButtonGetAnswer.IsEnabled = true;
-            wordIndex++;
-
-            if (wordsByChance == true)
-            {
-                wordIndex = RandomIndex.GetIndex(allWordsCount);
-            }
-
-            if (unit != 0)
-            {
-                TextBlockQuestion.Text = EnglishDataFiltered[wordIndex].TranslateWord.ToString();
-            }
-            else
-                TextBlockQuestion.Text = EnglishData[wordIndex].TranslateWord.ToString();
-
-            IsTheLastQuestion();
-        }
+       
 
         /* 
         Метод проверяет очередность данного вопроса: последний или нет. 
         Если вопрос последний (так же если в тесте всего 1 вопрос), то не должно быть кнопки далее
         Должна быть только кнопка ответить 
         */
-        private void IsTheLastQuestion()
+        private bool IsTheLastQuestion()
         {
             if (nowWordNumber == allWordsCount)
             {
                 ButtonNextQuestion.Visibility = Visibility.Hidden;
                 ButtonGetAnswer.Margin = new Thickness(5, 160, 0, 0);
                 ButtonGetAnswer.Width = 287;
+                return true;
             }
+            return false;
         }
 
-        // кнопка Ответить
-        private void ButtonGetAnswer_Click(object sender, RoutedEventArgs e)
-        {
-            if (ButtonNextQuestion.IsEnabled == false && ProgressBar.Value != ProgressBar.Maximum)
-            {
-                ButtonNextQuestion.IsEnabled = true;
-                ButtonGetAnswer.IsEnabled = false;
-            }
-            TextBoxAnswer.IsReadOnly = true;
-
-            if (nowWordNumber == allWordsCount)
-            {
-                testingIsEnd = true;
-                ButtonStartEndTesting.Visibility = Visibility.Visible;
-                ProgressBar.Visibility = Visibility.Hidden;
-                ButtonGetAnswer.IsEnabled = false;
-                ButtonGetAnswer.Visibility = Visibility.Hidden;
-                TextBlockAllWordsCount.Visibility = Visibility.Hidden;
-                this.Height = 245;
-            }
-            TextBlockCorrectAnswer.FontWeight = FontWeights.Bold;
-            if (unit != 0)
-            {
-                if (string.Equals(EnglishDataFiltered[wordIndex].EnglishWord, TextBoxAnswer.Text) == true)
-                {
-                    TextBoxAnswer.Foreground = Brushes.Green;
-                    correctAnswerCount++;
-                    
-                }
-                else
-                {
-                    TextBoxAnswer.Foreground = Brushes.Red;
-                }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishDataFiltered[wordIndex].EnglishWord;
-            }
-            else
-            {
-                if (string.Equals(EnglishData[wordIndex].EnglishWord, TextBoxAnswer.Text) == true)
-                {
-                    TextBoxAnswer.Foreground = Brushes.Green;
-                    correctAnswerCount++;
-                }
-                else
-                {
-                    TextBoxAnswer.Foreground = Brushes.Red;
-                }
-                TextBlockCorrectAnswer.Text = "Correct answer: " + EnglishData[wordIndex].EnglishWord;
-            }
-        }
+       
     }
 }
