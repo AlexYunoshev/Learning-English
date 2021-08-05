@@ -219,8 +219,13 @@ namespace Learning_English
         {
            
             timerValue = timerValue - TimeSpan.FromSeconds(1);
-            //MessageBox.Show(timerValue.ToString());
             TextBoxTimerMinutes.Text = timerValue.ToString(@"mm\:ss");
+            if (TimeSpan.Compare(timerValue, new TimeSpan(0,0,0)) == 0)
+            {
+                exit = true;
+                this.Close();
+                //MessageBox.Show("Time end");
+            }
 
         }
 
@@ -250,13 +255,7 @@ namespace Learning_English
             }
         }
 
-        
-
-        /*private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            TextBoxTimerMinutes.Text = time.ToString();
-            //time.AddSeconds(-1);
-        }*/
+       
 
         private void UpdateComboBox()
         {
